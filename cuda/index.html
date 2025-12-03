@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>CUDA | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://huts1234.github.io/favicon.ico?v=1764722134508">
+<link rel="stylesheet" href="https://huts1234.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="CUDA 编程完全指南：GPU 并行计算从入门到精通
+
+一、CUDA 核心概念与架构
+1. GPU 与 CPU 计算范式对比
+
+
+
+维度
+CPU
+GPU
+
+
+
+
+核心数量
+4-64（多核）
+数千（流处理器）
+
+
+线程模型
+重量级线程（上下文..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://huts1234.github.io">
+        <img src="https://huts1234.github.io/images/avatar.png?v=1764722134508" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://huts1234.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">CUDA</h2>
+            <div class="post-date">2025-11-28</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="cuda-编程完全指南gpu-并行计算从入门到精通">CUDA 编程完全指南：GPU 并行计算从入门到精通</h1>
+<hr>
+<h2 id="一-cuda-核心概念与架构">一、CUDA 核心概念与架构</h2>
+<h3 id="1-gpu-与-cpu-计算范式对比">1. GPU 与 CPU 计算范式对比</h3>
+<table>
+<thead>
+<tr>
+<th><strong>维度</strong></th>
+<th>CPU</th>
+<th>GPU</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>核心数量</td>
+<td>4-64（多核）</td>
+<td>数千（流处理器）</td>
+</tr>
+<tr>
+<td>线程模型</td>
+<td>重量级线程（上下文切换高开销）</td>
+<td>轻量级线程（纳秒级切换）</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>复杂逻辑、低并行度任务</td>
+<td>高并行数据计算任务</td>
+</tr>
+<tr>
+<td>内存带宽</td>
+<td>50-100 GB/s</td>
+<td>400-1000 GB/s (NVIDIA A100)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-cuda-核心架构组件">2. CUDA 核心架构组件</h3>
+<ul>
+<li><strong>SM（Streaming Multiprocessor）</strong>：GPU核心执行单元，包含：
+<ul>
+<li>CUDA Core（浮点运算单元）</li>
+<li>Tensor Core（矩阵加速，支持混合精度）</li>
+<li>RT Core（光线追踪专用）</li>
+</ul>
+</li>
+<li><strong>内存层次</strong>：
+<ul>
+<li>全局内存（Global Memory）：显存，带宽高但延迟高</li>
+<li>共享内存（Shared Memory）：片上缓存，块内线程共享</li>
+<li>寄存器（Register）：每个线程私有，零延迟访问</li>
+<li>常量/纹理内存：优化特定访问模式</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="二-cuda-编程模型详解">二、CUDA 编程模型详解</h2>
+<h3 id="1-线程层次结构">1. 线程层次结构</h3>
+<table>
+<thead>
+<tr>
+<th><strong>层级</strong></th>
+<th>描述</th>
+<th>访问范围</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Thread</td>
+<td>最小执行单元</td>
+<td>私有寄存器/本地变量</td>
+</tr>
+<tr>
+<td>Block</td>
+<td>线程集合（最多1024线程）</td>
+<td>共享内存、同步操作</td>
+</tr>
+<tr>
+<td>Grid</td>
+<td>Block 集合</td>
+<td>全局内存、原子操作</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-内核函数定义与启动">2. 内核函数定义与启动</h3>
+<pre><code class="language-cpp">// 向量加法内核函数
+__global__ void vecAdd(float* A, float* B, float* C, int n) {
+    int i = blockIdx.x * blockDim.x + threadIdx.x;
+    if (i &lt; n) C[i] = A[i] + B[i];
+}
+
+// 主机端调用
+int main() {
+    int N = 1&lt;&lt;20;  // 1百万元素
+    vecAdd&lt;&lt;&lt;(N+255)/256, 256&gt;&gt;&gt;(d_A, d_B, d_C, N);
+}
+</code></pre>
+<hr>
+<h2 id="三-cuda-内存管理实战">三、CUDA 内存管理实战</h2>
+<h3 id="1-内存操作-api">1. 内存操作 API</h3>
+<pre><code class="language-cpp">float *d_A;
+// 分配全局内存
+cudaMalloc(&amp;d_A, N * sizeof(float));  
+
+// 主机到设备拷贝
+cudaMemcpy(d_A, h_A, N * sizeof(float), cudaMemcpyHostToDevice);
+
+// 使用共享内存
+__shared__ float s_data[512];
+</code></pre>
+<h3 id="2-内存访问优化策略">2. 内存访问优化策略</h3>
+<ul>
+<li><strong>合并访问</strong>：线程连续访问全局内存（避免分散访问）<pre><code class="language-cpp">// 优化前：跨步访问
+int i = threadIdx.x + blockIdx.x * blockDim.x * 2;
+
+// 优化后：合并访问
+int i = blockIdx.x * blockDim.x + threadIdx.x;
+</code></pre>
+</li>
+<li><strong>Bank Conflict 避免</strong>：共享内存分32个Bank，确保线程访问不同Bank</li>
+<li><strong>使用L2 Cache</strong>：通过<code>__ldg</code>指令强制缓存读取</li>
+</ul>
+<hr>
+<h2 id="四-cuda-高级特性与性能调优">四、CUDA 高级特性与性能调优</h2>
+<h3 id="1-流与异步操作">1. 流与异步操作</h3>
+<pre><code class="language-cpp">cudaStream_t stream1, stream2;
+cudaStreamCreate(&amp;stream1);
+cudaStreamCreate(&amp;stream2);
+
+// 异步内存拷贝
+cudaMemcpyAsync(d_A, h_A, N, cudaMemcpyHostToDevice, stream1);
+
+// 多流并行执行
+kernel1&lt;&lt;&lt;grid, block, 0, stream1&gt;&gt;&gt;(...);
+kernel2&lt;&lt;&lt;grid, block, 0, stream2&gt;&gt;&gt;(...);
+</code></pre>
+<h3 id="2-性能分析工具">2. 性能分析工具</h3>
+<table>
+<thead>
+<tr>
+<th><strong>工具</strong></th>
+<th>功能</th>
+<th>示例命令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nvprof</td>
+<td>命令行性能分析器</td>
+<td><code>nvprof ./myapp</code></td>
+</tr>
+<tr>
+<td>Nsight Systems</td>
+<td>系统级性能可视化</td>
+<td><code>nsys profile -o report ./myapp</code></td>
+</tr>
+<tr>
+<td>Nsight Compute</td>
+<td>内核级指令分析</td>
+<td><code>ncu -k myKernel ./myapp</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="五-cuda-应用场景与库">五、CUDA 应用场景与库</h2>
+<h3 id="1-典型应用领域">1. 典型应用领域</h3>
+<ul>
+<li><strong>深度学习</strong>：cuDNN 加速卷积运算，TensorRT 推理优化</li>
+<li><strong>科学计算</strong>：cuBLAS 矩阵运算，CUDA Fortran 数值模拟</li>
+<li><strong>图像处理</strong>：NPP (NVIDIA Performance Primitives) 图像算法加速</li>
+<li><strong>金融计算</strong>：Monte Carlo 模拟并行化</li>
+</ul>
+<h3 id="2-混合编程案例">2. 混合编程案例</h3>
+<pre><code class="language-cpp">// CUDA 加速的矩阵乘法
+void matrixMul(float* A, float* B, float* C, int M, int N, int K) {
+    dim3 block(16, 16);
+    dim3 grid((N + block.x - 1)/block.x, (M + block.y - 1)/block.y);
+    matrixMulKernel&lt;&lt;&lt;grid, block&gt;&gt;&gt;(A, B, C, M, N, K);
+}
+</code></pre>
+<hr>
+<h2 id="六-常见问题与调试技巧">六、常见问题与调试技巧</h2>
+<h3 id="1-错误排查">1. 错误排查</h3>
+<table>
+<thead>
+<tr>
+<th><strong>错误类型</strong></th>
+<th>解决方案</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kernel Launch Failure</td>
+<td>检查线程配置（block/grid尺寸）</td>
+</tr>
+<tr>
+<td>Illegal Memory Access</td>
+<td>使用<code>cuda-memcheck</code>工具检测</td>
+</tr>
+<tr>
+<td>内核未执行</td>
+<td>添加<code>cudaDeviceSynchronize()</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-最佳实践">2. 最佳实践</h3>
+<ul>
+<li><strong>统一内存（Unified Memory）</strong>：简化内存管理<pre><code class="language-cpp">cudaMallocManaged(&amp;data, size);  // CPU/GPU统一地址空间
+</code></pre>
+</li>
+<li><strong>避免线程分歧</strong>：确保同一Warp内的线程执行相同分支</li>
+<li><strong>合理使用原子操作</strong>：优先使用块内共享内存减少全局原子操作</li>
+</ul>
+<hr>
+<p>掌握 CUDA 编程可充分释放 GPU 的并行计算潜力。建议从向量运算等基础案例入手，逐步掌握内存优化和高级特性，结合Nsight工具持续调优。 🚀🎮</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://huts1234.github.io/aosp/">
+                  <h3 class="post-title">
+                    AOSP
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

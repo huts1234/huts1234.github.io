@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Wine | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://huts1234.github.io/favicon.ico?v=1764722134508">
+<link rel="stylesheet" href="https://huts1234.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="Wine 终极指南：在非 Windows 系统运行 .exe 程序
+
+一、Wine 的核心原理
+1. 技术架构
+
+API 转换层：将 Windows API 调用（如 Win32、.dll）动态转换为 POSIX 调用（Linux/macO..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://huts1234.github.io">
+        <img src="https://huts1234.github.io/images/avatar.png?v=1764722134508" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://huts1234.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Wine</h2>
+            <div class="post-date">2025-11-28</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="wine-终极指南在非-windows-系统运行-exe-程序">Wine 终极指南：在非 Windows 系统运行 .exe 程序</h1>
+<hr>
+<h2 id="一-wine-的核心原理">一、Wine 的核心原理</h2>
+<h3 id="1-技术架构">1. 技术架构</h3>
+<ul>
+<li><strong>API 转换层</strong>：将 Windows API 调用（如 <code>Win32</code>、<code>.dll</code>）动态转换为 POSIX 调用（Linux/macOS 原生）</li>
+<li><strong>兼容性层</strong>：内置仿真的 Windows 系统组件（注册表、驱动模型）</li>
+<li><strong>无需虚拟机</strong>：直接运行二进制文件，资源占用低（对比虚拟机节省 80% 内存）</li>
+</ul>
+<h3 id="2-适用场景">2. 适用场景</h3>
+<table>
+<thead>
+<tr>
+<th><strong>兼容性评级</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>典型应用</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Platinum</td>
+<td>完美运行，无已知问题</td>
+<td>Notepad++, 7-Zip</td>
+</tr>
+<tr>
+<td>Gold</td>
+<td>基本功能正常，偶现小问题</td>
+<td>Office 2010, Photoshop CS6</td>
+</tr>
+<tr>
+<td>Silver</td>
+<td>部分功能可用，需手动配置</td>
+<td>部分游戏（如《魔兽争霸3》）</td>
+</tr>
+<tr>
+<td>Bronze</td>
+<td>仅启动界面，无法实际使用</td>
+<td>依赖 DirectX 12 的应用</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="二-安装与配置">二、安装与配置</h2>
+<h3 id="1-linux-安装以-ubuntu-为例">1. Linux 安装（以 Ubuntu 为例）</h3>
+<pre><code class="language-bash"># 启用 32 位架构支持
+sudo dpkg --add-architecture i386
+
+# 添加 Wine 官方仓库
+sudo mkdir -p /etc/apt/keyrings
+sudo wget -O /etc/apt/keyrings/winehq-archive.key https://dl.winehq.org/wine-builds/winehq.key
+sudo echo &quot;deb [signed-by=/etc/apt/keyrings/winehq-archive.key] https://dl.winehq.org/wine-builds/ubuntu/ $(lsb_release -cs) main&quot; | sudo tee /etc/apt/sources.list.d/winehq.list
+
+# 安装稳定版 Wine
+sudo apt update
+sudo apt install --install-recommends winehq-stable
+</code></pre>
+<h3 id="2-macos-安装">2. macOS 安装</h3>
+<pre><code class="language-bash"># 使用 Homebrew 安装
+brew install --cask wine-stable
+
+# 或下载官方 PKG 包
+wget https://dl.winehq.org/wine-builds/macosx/download.html
+</code></pre>
+<h3 id="3-初始化-wine-环境">3. 初始化 Wine 环境</h3>
+<pre><code class="language-bash">winecfg  # 自动生成 ~/.wine 目录（即 Wine 前缀）
+</code></pre>
+<hr>
+<h2 id="三-运行-windows-应用">三、运行 Windows 应用</h2>
+<h3 id="1-基础命令">1. 基础命令</h3>
+<pre><code class="language-bash">wine /path/to/app.exe          # 直接运行程序
+wine start /unix /path/to/app  # 使用 start 命令
+wine explorer                 # 打开 Wine 文件管理器
+</code></pre>
+<h3 id="2-使用-winetricks-安装依赖">2. 使用 Winetricks 安装依赖</h3>
+<pre><code class="language-bash"># 安装 Winetricks
+sudo apt install winetricks     # Linux
+brew install winetricks         # macOS
+
+# 安装常用组件（如 .NET Framework 4.8）
+winetricks corefonts vcrun2019 dotnet48
+</code></pre>
+<h3 id="4-创建独立前缀避免软件冲突">4. 创建独立前缀（避免软件冲突）</h3>
+<pre><code class="language-bash">WINEPREFIX=~/.wine-office winecfg  # 为 Office 创建独立环境
+WINEPREFIX=~/.wine-office wine /path/to/office.exe
+</code></pre>
+<hr>
+<h2 id="四-性能优化与问题解决">四、性能优化与问题解决</h2>
+<h3 id="1-图形加速配置">1. 图形加速配置</h3>
+<pre><code class="language-bash"># 启用 Vulkan 支持（需显卡驱动支持）
+export VK_ICD_FILENAMES=/usr/share/vulkan/icd.d/radeon_icd.x86_64.json
+wine app.exe
+
+# 使用 DXVK（DirectX 转 Vulkan）
+git clone https://github.com/doitsujin/dxvk.git
+cd dxvk
+./setup_dxvk.sh install --symlink
+</code></pre>
+<h3 id="2-常见错误修复">2. 常见错误修复</h3>
+<table>
+<thead>
+<tr>
+<th><strong>错误类型</strong></th>
+<th><strong>解决方案</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>缺少 .dll 文件</td>
+<td><code>winetricks dll_name</code>（如 <code>winetricks d3dx9_43</code>）</td>
+</tr>
+<tr>
+<td>字体乱码</td>
+<td><code>winetricks cjkfonts</code> 安装中文字体</td>
+</tr>
+<tr>
+<td>程序闪退</td>
+<td>在终端运行并查看日志：<code>wine app.exe &gt; log.txt 2&gt;&amp;1</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="五-高级应用场景">五、高级应用场景</h2>
+<h3 id="1-运行-windows-游戏">1. 运行 Windows 游戏</h3>
+<pre><code class="language-bash"># 安装游戏运行库
+winetricks d3dx9 d3dcompiler_43 dxvk
+
+# 使用 Lutris 管理游戏
+sudo apt install lutris
+lutris.net 下载预配置脚本
+</code></pre>
+<h3 id="2-使用-protonsteam-游戏兼容层">2. 使用 Proton（Steam 游戏兼容层）</h3>
+<ol>
+<li>启用 Steam Play：Steam → 设置 → Steam Play → 为所有游戏启用</li>
+<li>强制使用指定 Proton 版本：游戏属性 → 兼容性 → 选择 Proton Experimental</li>
+</ol>
+<h3 id="3-打包为独立应用macos">3. 打包为独立应用（macOS）</h3>
+<pre><code class="language-bash"># 使用 Wineskin 创建 .app 包
+brew install --cask wineskin
+# 在 GUI 中配置并打包
+</code></pre>
+<hr>
+<h2 id="六-替代方案对比">六、替代方案对比</h2>
+<table>
+<thead>
+<tr>
+<th><strong>方案</strong></th>
+<th><strong>性能</strong></th>
+<th><strong>兼容性</strong></th>
+<th><strong>资源占用</strong></th>
+<th><strong>适用场景</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Wine</td>
+<td>高</td>
+<td>中</td>
+<td>低</td>
+<td>轻量级应用、旧版软件</td>
+</tr>
+<tr>
+<td>虚拟机</td>
+<td>中</td>
+<td>高</td>
+<td>高</td>
+<td>复杂应用、需全功能 Windows</td>
+</tr>
+<tr>
+<td>双系统</td>
+<td>最高</td>
+<td>完美</td>
+<td>独立系统</td>
+<td>高频使用专业软件</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><strong>资源推荐</strong>：</p>
+<ul>
+<li><a href="https://appdb.winehq.org/">WineHQ 应用数据库</a> ：查询软件兼容性评级</li>
+<li><a href="https://www.protondb.com/">ProtonDB</a> ：查看 Steam 游戏在 Linux 下的运行情况</li>
+<li><a href="https://github.com/doitsujin/dxvk">DXVK GitHub</a> ：图形性能优化工具</li>
+</ul>
+<p>掌握 Wine 的配置技巧，可在非 Windows 系统中无缝运行多数应用，摆脱平台限制。 🍷🖥️</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://huts1234.github.io/termux/">
+                  <h3 class="post-title">
+                    termux
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

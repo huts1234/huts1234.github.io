@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Docker | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://huts1234.github.io/favicon.ico?v=1764722134508">
+<link rel="stylesheet" href="https://huts1234.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="Docker容器深度指南
+
+一、Docker核心概念
+1. Docker vs 虚拟机
+
+
+
+维度
+Docker容器
+虚拟机（VM）
+
+
+
+
+虚拟化层级
+操作系统级（共享宿主机内核）
+硬件级（独立内核）
+
+
+启动速度
+秒级（毫秒级）
+分钟级..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://huts1234.github.io">
+        <img src="https://huts1234.github.io/images/avatar.png?v=1764722134508" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://huts1234.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Docker</h2>
+            <div class="post-date">2025-11-28</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="docker容器深度指南">Docker容器深度指南</h1>
+<hr>
+<h2 id="一-docker核心概念">一、Docker核心概念</h2>
+<h3 id="1-docker-vs-虚拟机">1. Docker vs 虚拟机</h3>
+<table>
+<thead>
+<tr>
+<th><strong>维度</strong></th>
+<th><strong>Docker容器</strong></th>
+<th><strong>虚拟机（VM）</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>虚拟化层级</td>
+<td>操作系统级（共享宿主机内核）</td>
+<td>硬件级（独立内核）</td>
+</tr>
+<tr>
+<td>启动速度</td>
+<td>秒级（毫秒级）</td>
+<td>分钟级</td>
+</tr>
+<tr>
+<td>资源占用</td>
+<td>低（仅进程所需资源）</td>
+<td>高（需分配固定CPU/内存）</td>
+</tr>
+<tr>
+<td>隔离性</td>
+<td>进程级隔离（较虚拟机弱）</td>
+<td>完全隔离</td>
+</tr>
+<tr>
+<td>镜像体积</td>
+<td>通常为MB级（如Alpine镜像仅5MB）</td>
+<td>GB级（完整操作系统）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-核心组件">2. 核心组件</h3>
+<ul>
+<li><strong>镜像（Image）</strong>：只读模板（如<code>nginx:alpine</code>），包含应用及其依赖</li>
+<li><strong>容器（Container）</strong>：镜像的运行实例（可读写层）</li>
+<li><strong>仓库（Registry）</strong>：镜像存储中心（默认Docker Hub，私有仓库如Harbor）</li>
+<li><strong>Dockerfile</strong>：定义镜像构建步骤的脚本文件</li>
+<li><strong>Docker Compose</strong>：通过YAML文件管理多容器应用</li>
+</ul>
+<hr>
+<h2 id="二-docker安装与配置">二、Docker安装与配置</h2>
+<h3 id="1-安装docker引擎">1. 安装Docker引擎</h3>
+<pre><code class="language-bash"># Linux通用安装脚本
+curl -fsSL https://get.docker.com | sudo sh
+
+# 验证安装
+sudo docker run hello-world
+</code></pre>
+<h3 id="2-配置镜像加速国内">2. 配置镜像加速（国内）</h3>
+<pre><code class="language-bash"># 创建配置文件
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json &lt;&lt;-'EOF'
+{
+  &quot;registry-mirrors&quot;: [
+    &quot;https://dockerproxy.com&quot;,
+    &quot;https://hub-mirror.c.163.com&quot;
+  ]
+}
+EOF
+
+# 重启服务
+sudo systemctl restart docker
+</code></pre>
+<hr>
+<h2 id="三-docker核心操作">三、Docker核心操作</h2>
+<h3 id="1-镜像管理">1. 镜像管理</h3>
+<table>
+<thead>
+<tr>
+<th><strong>操作</strong></th>
+<th><strong>命令示例</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>拉取镜像</td>
+<td><code>docker pull nginx:alpine</code></td>
+<td>指定标签下载镜像</td>
+</tr>
+<tr>
+<td>列出镜像</td>
+<td><code>docker images</code> 或 <code>docker image ls</code></td>
+<td>显示本地镜像列表</td>
+</tr>
+<tr>
+<td>删除镜像</td>
+<td><code>docker rmi &lt;image_id&gt;</code></td>
+<td>清理未使用的镜像</td>
+</tr>
+<tr>
+<td>构建镜像</td>
+<td><code>docker build -t myapp:v1 .</code></td>
+<td>根据Dockerfile构建镜像</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-容器生命周期">2. 容器生命周期</h3>
+<table>
+<thead>
+<tr>
+<th><strong>操作</strong></th>
+<th><strong>命令示例</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>启动新容器</td>
+<td><code>docker run -d --name mynginx -p 80:80 nginx</code></td>
+<td>-d后台运行，-p端口映射</td>
+</tr>
+<tr>
+<td>列出运行中容器</td>
+<td><code>docker ps</code></td>
+<td>添加<code>-a</code>显示所有容器</td>
+</tr>
+<tr>
+<td>停止/启动容器</td>
+<td><code>docker stop mynginx</code> 或 <code>docker start mynginx</code></td>
+<td>强制停止用<code>docker kill</code></td>
+</tr>
+<tr>
+<td>进入容器终端</td>
+<td><code>docker exec -it mynginx /bin/sh</code></td>
+<td>交互式执行命令（推荐<code>sh</code>或<code>bash</code>）</td>
+</tr>
+<tr>
+<td>查看容器日志</td>
+<td><code>docker logs -f mynginx</code></td>
+<td>实时跟踪日志输出</td>
+</tr>
+<tr>
+<td>删除容器</td>
+<td><code>docker rm mynginx</code></td>
+<td>强制删除运行中容器加<code>-f</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="四-docker数据持久化">四、Docker数据持久化</h2>
+<h3 id="1-数据卷volumes">1. 数据卷（Volumes）</h3>
+<pre><code class="language-bash"># 创建并挂载数据卷
+docker run -d --name mysql \
+  -v mysql_data:/var/lib/mysql \
+  -e MYSQL_ROOT_PASSWORD=123456 \
+  mysql:8.0
+</code></pre>
+<ul>
+<li><strong>查看卷信息</strong>：<code>docker volume inspect mysql_data</code></li>
+</ul>
+<h3 id="2-绑定挂载bind-mounts">2. 绑定挂载（Bind Mounts）</h3>
+<pre><code class="language-bash"># 挂载宿主机目录到容器
+docker run -d --name myapp \
+  -v /host/path:/container/path \
+  myapp:v1
+</code></pre>
+<hr>
+<h2 id="五-docker网络模型">五、Docker网络模型</h2>
+<h3 id="1-网络模式">1. 网络模式</h3>
+<table>
+<thead>
+<tr>
+<th><strong>模式</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>应用场景</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>bridge（默认）</td>
+<td>创建虚拟网桥，容器通过NAT通信</td>
+<td>单主机多容器隔离环境</td>
+</tr>
+<tr>
+<td>host</td>
+<td>容器共享宿主机网络栈</td>
+<td>高性能需求（如网络监控工具）</td>
+</tr>
+<tr>
+<td>none</td>
+<td>无网络接口</td>
+<td>特殊安全场景</td>
+</tr>
+<tr>
+<td>overlay</td>
+<td>跨主机容器通信（Swarm集群）</td>
+<td>分布式应用</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-自定义网络">2. 自定义网络</h3>
+<pre><code class="language-bash"># 创建自定义网络
+docker network create mynet
+
+# 运行容器并加入网络
+docker run -d --name web --network mynet nginx
+docker run -d --name db --network mynet mysql
+</code></pre>
+<hr>
+<h2 id="六-docker-compose编排">六、Docker Compose编排</h2>
+<h3 id="1-安装docker-compose">1. 安装Docker Compose</h3>
+<pre><code class="language-bash"># 下载二进制文件（替换版本号）
+sudo curl -L &quot;https://github.com/docker/compose/releases/download/v2.25.0/docker-compose-$(uname -s)-$(uname -m)&quot; -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+</code></pre>
+<h3 id="2-编写docker-composeyml">2. 编写<code>docker-compose.yml</code></h3>
+<pre><code class="language-yaml">version: '3.8'
+
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - &quot;80:80&quot;
+    volumes:
+      - ./html:/usr/share/nginx/html
+    networks:
+      - mynet
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - mynet
+
+volumes:
+  mysql_data:
+
+networks:
+  mynet:
+</code></pre>
+<h3 id="3-常用命令">3. 常用命令</h3>
+<pre><code class="language-bash">docker-compose up -d    # 启动服务
+docker-compose down     # 停止并删除容器
+docker-compose logs -f  # 查看日志
+</code></pre>
+<hr>
+<h2 id="七-最佳实践与安全">七、最佳实践与安全</h2>
+<h3 id="1-镜像优化">1. 镜像优化</h3>
+<ul>
+<li><strong>多阶段构建</strong>：减少最终镜像体积<pre><code class="language-dockerfile">FROM golang:1.20 AS builder
+WORKDIR /app
+COPY . .
+RUN go build -o myapp .
+
+FROM alpine:3.18
+COPY --from=builder /app/myapp /usr/local/bin/
+CMD [&quot;myapp&quot;]
+</code></pre>
+</li>
+</ul>
+<h3 id="2-安全建议">2. 安全建议</h3>
+<ul>
+<li><strong>非root用户运行</strong>：<pre><code class="language-dockerfile">FROM alpine
+RUN adduser -D myuser
+USER myuser
+</code></pre>
+</li>
+<li><strong>定期更新镜像</strong>：<code>docker scan</code>检测漏洞</li>
+<li><strong>限制资源</strong>：<pre><code class="language-bash">docker run -d --memory=512m --cpus=1 myapp
+</code></pre>
+</li>
+</ul>
+<hr>
+<h2 id="八-常见问题解决">八、常见问题解决</h2>
+<h3 id="1-容器启动失败">1. 容器启动失败</h3>
+<ul>
+<li><strong>查看日志</strong>：<code>docker logs &lt;container_id&gt;</code></li>
+<li><strong>检查端口冲突</strong>：<code>netstat -tuln \| grep 80</code></li>
+</ul>
+<h3 id="2-网络不通">2. 网络不通</h3>
+<ul>
+<li><strong>验证防火墙</strong>：<code>ufw allow 80/tcp</code></li>
+<li><strong>检查DNS配置</strong>：<code>docker run --dns 8.8.8.8 nginx</code></li>
+</ul>
+<h3 id="3-数据卷权限问题">3. 数据卷权限问题</h3>
+<ul>
+<li><strong>设置文件权限</strong>：在Dockerfile中添加<code>chmod</code>命令<pre><code class="language-dockerfile">RUN chmod 755 /app/data
+</code></pre>
+</li>
+</ul>
+<hr>
+<p>Docker容器技术极大简化了应用部署与维护流程，结合Kubernetes等编排工具，可构建高效可靠的云原生架构。 🐳🚀</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://huts1234.github.io/deepin/">
+                  <h3 class="post-title">
+                    Deepin
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

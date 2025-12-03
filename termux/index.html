@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>termux | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://huts1234.github.io/favicon.ico?v=1764722134508">
+<link rel="stylesheet" href="https://huts1234.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="以下是 Termux 的详细使用指南，涵盖安装、配置及常见操作：
+
+Termux 终极指南：在 Android 上打造 Linux 终端环境
+一、基础配置
+1. 初始化环境
+# 更新源列表并升级所有包
+pkg update &amp;&am..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://huts1234.github.io">
+        <img src="https://huts1234.github.io/images/avatar.png?v=1764722134508" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://huts1234.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">termux</h2>
+            <div class="post-date">2025-11-28</div>
+            
+            <div class="post-content" v-pre>
+              <p>以下是 Termux 的详细使用指南，涵盖安装、配置及常见操作：</p>
+<hr>
+<h1 id="termux-终极指南在-android-上打造-linux-终端环境">Termux 终极指南：在 Android 上打造 Linux 终端环境</h1>
+<h2 id="一-基础配置">一、基础配置</h2>
+<h3 id="1-初始化环境">1. 初始化环境</h3>
+<pre><code class="language-bash"># 更新源列表并升级所有包
+pkg update &amp;&amp; pkg upgrade -y
+
+# 安装核心工具集
+pkg install -y coreutils curl wget git nano vim
+
+# 配置存储权限（允许访问手机存储）
+termux-setup-storage
+</code></pre>
+<h3 id="2-换国内源加速下载">2. 换国内源（加速下载）</h3>
+<pre><code class="language-bash"># 替换为清华源
+sed -i 's@^\(deb.*stable main\)$@#\1\ndeb https://mirrors.tuna.tsinghua.edu.cn/termux/termux-packages-24 stable main@' $PREFIX/etc/apt/sources.list
+
+# 更新生效
+pkg update
+</code></pre>
+<h2 id="二-开发环境搭建">二、开发环境搭建</h2>
+<h3 id="1-python-开发栈">1. Python 开发栈</h3>
+<pre><code class="language-bash">pkg install python -y
+pip install --upgrade pip
+pip install numpy requests flask
+
+# 验证安装
+python -c &quot;import flask; print(flask.__version__)&quot;
+</code></pre>
+<h3 id="2-nodejs-环境">2. Node.js 环境</h3>
+<pre><code class="language-bash">pkg install nodejs-lts -y  # 安装 LTS 版本
+npm install -g yarn pm2
+
+# 创建测试项目
+mkdir node-app &amp;&amp; cd node-app
+npm init -y
+npm install express
+</code></pre>
+<h3 id="3-数据库服务">3. 数据库服务</h3>
+<pre><code class="language-bash"># 安装 MariaDB
+pkg install mariadb -y
+
+# 初始化数据库
+mysql_install_db
+mysqld_safe -u $(whoami) &amp;
+mysql -u $(whoami)
+</code></pre>
+<h2 id="三-高级功能配置">三、高级功能配置</h2>
+<h3 id="1-ssh-远程访问">1. SSH 远程访问</h3>
+<pre><code class="language-bash"># 安装 OpenSSH
+pkg install openssh -y
+
+# 设置密码（默认为设备锁屏密码）
+passwd
+
+# 启动 SSH 服务（默认端口8022）
+sshd
+</code></pre>
+<p>从 PC 连接：</p>
+<pre><code class="language-bash">ssh -p 8022 手机IP地址
+</code></pre>
+<h3 id="2-运行-web-服务器">2. 运行 Web 服务器</h3>
+<pre><code class="language-bash"># 使用 Python 快速启动（端口8080）
+python -m http.server 8080
+
+# 或安装 Nginx
+pkg install nginx -y
+nginx
+</code></pre>
+<p>通过浏览器访问：<code>http://手机IP:8080</code></p>
+<h2 id="四-系统管理技巧">四、系统管理技巧</h2>
+<h3 id="1-进程监控">1. 进程监控</h3>
+<pre><code class="language-bash"># 安装 htop 查看资源占用
+pkg install htop -y
+htop
+</code></pre>
+<h3 id="2-定时任务">2. 定时任务</h3>
+<pre><code class="language-bash"># 安装 cronie
+pkg install cronie -y
+
+# 启动服务
+crond
+
+# 添加每日备份任务（示例）
+echo &quot;0 3 * * * tar -zcf /sdcard/backup/termux-home-$(date +\%Y\%m\%d).tgz -C $HOME .&quot; &gt; crontab
+crontab crontab
+</code></pre>
+<h2 id="五-实用工具集">五、实用工具集</h2>
+<h3 id="1-网络诊断">1. 网络诊断</h3>
+<pre><code class="language-bash">pkg install nmap net-tools dnsutils -y
+
+# 扫描本地网络
+nmap -sn 192.168.1.0/24
+
+# 查看网络接口
+ifconfig
+</code></pre>
+<h3 id="2-文件管理">2. 文件管理</h3>
+<pre><code class="language-bash"># 安装 Ranger 终端文件管理器
+pkg install ranger -y
+ranger
+
+# 使用 rsync 同步文件
+rsync -avz ~/Documents/ /sdcard/Backup/
+</code></pre>
+<h2 id="六-常见问题解决">六、常见问题解决</h2>
+<h3 id="1-软件包安装失败">1. 软件包安装失败</h3>
+<pre><code class="language-bash"># 清除缓存后重试
+pkg clean
+pkg update
+
+# 手动下载 deb 包安装
+wget https://mirror.example.com/package.deb
+dpkg -i package.deb
+</code></pre>
+<h3 id="2-中文显示异常">2. 中文显示异常</h3>
+<pre><code class="language-bash"># 安装中文字体和输入法
+pkg install fontconfig wqy-microhei -y
+
+# 设置环境变量
+echo &quot;export LANG=zh_CN.UTF-8&quot; &gt;&gt; ~/.bashrc
+source ~/.bashrc
+</code></pre>
+<hr>
+<p><strong>提示</strong>：</p>
+<ul>
+<li>长按屏幕可呼出快捷菜单（复制/粘贴/新建会话）</li>
+<li>外接键盘使用 <code>Ctrl</code> 组合键（如 <code>Ctrl+C</code> 中断进程）</li>
+<li>使用 <code>termux-chroot</code> 进入完整 Linux 文件系统视图</li>
+</ul>
+<p>通过 Termux，您的 Android 设备即可变身为便携式开发工作站！ 📱💻</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://huts1234.github.io/root/">
+                  <h3 class="post-title">
+                    root
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

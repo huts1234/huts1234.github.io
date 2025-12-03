@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>AOSP | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://huts1234.github.io/favicon.ico?v=1764722134508">
+<link rel="stylesheet" href="https://huts1234.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="Android 开源项目（AOSP）完全指南：构建、定制与贡献
+
+一、AOSP 的核心概念
+AOSP（Android Open Source Project） 是 Android 操作系统的开源代码库，提供完整的系统框架、原生应用及底层驱动..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://huts1234.github.io">
+        <img src="https://huts1234.github.io/images/avatar.png?v=1764722134508" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://huts1234.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">AOSP</h2>
+            <div class="post-date">2025-11-28</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="android-开源项目aosp完全指南构建-定制与贡献">Android 开源项目（AOSP）完全指南：构建、定制与贡献</h1>
+<hr>
+<h2 id="一-aosp-的核心概念">一、AOSP 的核心概念</h2>
+<p><strong>AOSP（Android Open Source Project）</strong> 是 Android 操作系统的开源代码库，提供完整的系统框架、原生应用及底层驱动支持。与厂商定制 ROM 相比，AOSP 的特点包括：</p>
+<ul>
+<li><strong>纯净性</strong>：无 Google 服务（GMS）及第三方预装应用</li>
+<li><strong>可定制性</strong>：允许深度修改系统组件（如内核、Framework 层）</li>
+<li><strong>开发用途</strong>：用于学习系统架构、开发新设备系统或合规定制</li>
+</ul>
+<hr>
+<h2 id="二-aosp-代码结构解析">二、AOSP 代码结构解析</h2>
+<h3 id="1-关键目录说明">1. 关键目录说明</h3>
+<table>
+<thead>
+<tr>
+<th><strong>目录路径</strong></th>
+<th><strong>内容</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>frameworks/base</code></td>
+<td>系统核心服务（ActivityManager、PackageManager）</td>
+</tr>
+<tr>
+<td><code>packages/apps</code></td>
+<td>预装应用（Settings、Launcher）</td>
+</tr>
+<tr>
+<td><code>system/core</code></td>
+<td>核心工具（logcat、adb）及 init 进程</td>
+</tr>
+<tr>
+<td><code>kernel/</code></td>
+<td>Linux 内核源码（各厂商分支如 <code>msm</code>、<code>exynos</code>）</td>
+</tr>
+<tr>
+<td><code>hardware/</code></td>
+<td>HAL（硬件抽象层）及厂商驱动接口</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-核心组件依赖">2. 核心组件依赖</h3>
+<pre><code class="language-mermaid">graph TD
+    A[Linux Kernel] --&gt; B[HAL]
+    B --&gt; C[Android Runtime (ART)]
+    C --&gt; D[Framework Services]
+    D --&gt; E[System Apps]
+</code></pre>
+<hr>
+<h2 id="三-环境配置与代码下载">三、环境配置与代码下载</h2>
+<h3 id="1-系统要求">1. 系统要求</h3>
+<ul>
+<li><strong>操作系统</strong>：Ubuntu 20.04/22.04（官方推荐）或 macOS（部分功能受限）</li>
+<li><strong>内存</strong>：16GB 以上（推荐 32GB）</li>
+<li><strong>存储</strong>：至少 300GB 可用空间（完整编译需 500GB+）</li>
+</ul>
+<h3 id="2-安装依赖工具">2. 安装依赖工具</h3>
+<pre><code class="language-bash"># Ubuntu 环境
+sudo apt update &amp;&amp; sudo apt install -y git-core gnupg flex bison build-essential zip curl zlib1g-dev gcc-multilib g++-multilib libc6-dev-i386 lib32ncurses5-dev x11proto-core-dev libx11-dev lib32z1-dev libgl1-mesa-dev libxml2-utils xsltproc unzip fontconfig python3 bc imagemagick ccache
+</code></pre>
+<h3 id="3-下载源码">3. 下载源码</h3>
+<pre><code class="language-bash"># 安装 repo 工具
+mkdir ~/bin
+curl https://storage.googleapis.com/git-repo-downloads/repo &gt; ~/bin/repo
+chmod a+x ~/bin/repo
+
+# 初始化仓库（以 Android 14 为例）
+mkdir aosp &amp;&amp; cd aosp
+repo init -u https://android.googlesource.com/platform/manifest -b android-14.0.0_r1
+repo sync -j$(nproc) --no-clone-bundle
+</code></pre>
+<hr>
+<h2 id="四-编译与刷机流程">四、编译与刷机流程</h2>
+<h3 id="1-选择构建目标">1. 选择构建目标</h3>
+<pre><code class="language-bash"># 查询设备代号（如 Pixel 7 代号 panther）
+source build/envsetup.sh
+lunch
+# 选择 aosp_panther-userdebug
+</code></pre>
+<h3 id="2-开始编译">2. 开始编译</h3>
+<pre><code class="language-bash"># 全量编译（首次）
+m -j$(nproc) all
+
+# 增量编译（修改后）
+m -j$(nproc) 
+</code></pre>
+<h3 id="3-刷入设备">3. 刷入设备</h3>
+<pre><code class="language-bash"># 进入 fastboot 模式
+adb reboot bootloader
+
+# 刷入所有分区（需解锁 Bootloader）
+fastboot flashall -w
+</code></pre>
+<hr>
+<h2 id="五-深度定制实践">五、深度定制实践</h2>
+<h3 id="1-修改系统服务">1. 修改系统服务</h3>
+<pre><code class="language-java">// frameworks/base/services/core/java/com/android/server/am/ActivityManagerService.java
+public void setDebugApp(String packageName, boolean waitForDebugger, boolean persistent) {
+    // 添加自定义逻辑
+}
+</code></pre>
+<h3 id="2-添加系统级权限">2. 添加系统级权限</h3>
+<pre><code class="language-xml">&lt;!-- frameworks/base/core/res/AndroidManifest.xml --&gt;
+&lt;permission android:name=&quot;android.permission.CUSTOM_PERMISSION&quot;
+    android:protectionLevel=&quot;signature&quot; /&gt;
+</code></pre>
+<h3 id="3-集成自定义内核">3. 集成自定义内核</h3>
+<pre><code class="language-bash"># 替换内核源码
+git clone https://github.com/your-kernel-repo kernel/msm
+make -C kernel/msm O=out ARCH=arm64 your_defconfig
+make -C kernel/msm O=out ARCH=arm64 -j$(nproc)
+cp out/arch/arm64/boot/Image.gz-dtb $AOSP/device/google/panther-kernel/
+</code></pre>
+<hr>
+<h2 id="六-贡献代码到-aosp">六、贡献代码到 AOSP</h2>
+<h3 id="1-代码提交流程">1. 代码提交流程</h3>
+<ol>
+<li>注册 <a href="https://android-review.googlesource.com/">Google Git 账号</a></li>
+<li>创建本地分支开发：<code>repo start your-feature .</code></li>
+<li>提交 Commit：<code>git commit -s</code>（需签署 CLA 协议）</li>
+<li>上传审核：<code>repo upload .</code></li>
+</ol>
+<h3 id="2-审核标准">2. 审核标准</h3>
+<ul>
+<li><strong>代码规范</strong>：符合 <a href="https://source.android.com/docs/setup/contribute/code-style">Android 代码风格指南</a></li>
+<li><strong>测试覆盖</strong>：添加单元测试（JUnit）或 CTS 验证用例</li>
+<li><strong>兼容性</strong>：确保修改不影响 API 兼容性（通过 <code>make update-api</code> 更新 API）</li>
+</ul>
+<hr>
+<h2 id="七-常见问题与解决">七、常见问题与解决</h2>
+<h3 id="1-编译失败内存不足">1. 编译失败（内存不足）</h3>
+<pre><code class="language-bash"># 增加交换空间（临时方案）
+sudo fallocate -l 32G /swapfile
+sudo chmod 600 /swapfile
+sudo mkswap /swapfile
+sudo swapon /swapfile
+</code></pre>
+<h3 id="2-驱动缺失厂商闭源组件">2. 驱动缺失（厂商闭源组件）</h3>
+<ul>
+<li><strong>下载二进制 Blobs</strong>：访问 <a href="https://developers.google.com/android/drivers">Google Drivers</a> 获取对应设备驱动</li>
+<li><strong>提取厂商镜像</strong>：使用 <code>extract-files.sh</code> 从已安装设备提取</li>
+</ul>
+<hr>
+<h2 id="八-法律与许可须知">八、法律与许可须知</h2>
+<ul>
+<li><strong>GPL 合规</strong>：修改内核代码需开源（如使用 <code>kernel/</code> 目录代码）</li>
+<li><strong>Apache 2.0</strong>：应用层代码修改需保留版权声明</li>
+<li><strong>GMS 授权</strong>：预装 Google 服务需通过 <a href="https://www.android.com/gms/">GMS 认证</a></li>
+</ul>
+<hr>
+<p>通过深入 AOSP 开发，您将全面掌握 Android 系统的底层机制。建议从模块化修改（如定制开机动画）入手，逐步深入 Framework 与 HAL 层开发。更多资源请参考 <a href="https://source.android.com/">AOSP 官方文档</a>。 🛠️📱</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://huts1234.github.io/web-qian-hou-duan/">
+                  <h3 class="post-title">
+                    Web前后端
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

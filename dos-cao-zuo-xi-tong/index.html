@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>DOS操作系统 | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://huts1234.github.io/favicon.ico?v=1764722134508">
+<link rel="stylesheet" href="https://huts1234.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="DOS（磁盘操作系统）是一种早期广泛应用于个人计算机的命令行界面操作系统，其发展历程、功能特性及现状可概括如下：
+1. 定义与历史背景
+DOS全称Disk Operating System，由微软公司为IBM个人计算机开发，1981年首次发..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://huts1234.github.io">
+        <img src="https://huts1234.github.io/images/avatar.png?v=1764722134508" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://huts1234.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">DOS操作系统</h2>
+            <div class="post-date">2025-11-28</div>
+            
+            <div class="post-content" v-pre>
+              <p>DOS（磁盘操作系统）是一种早期广泛应用于个人计算机的命令行界面操作系统，其发展历程、功能特性及现状可概括如下：</p>
+<h3 id="1-定义与历史背景">1. <strong>定义与历史背景</strong></h3>
+<p>DOS全称<strong>Disk Operating System</strong>，由微软公司为IBM个人计算机开发，1981年首次发布。它采用字符界面，用户通过输入命令实现操作，主要功能包括磁盘管理、文件处理及设备驱动。DOS有两种主流版本：IBM的PC-DOS和微软的MS-DOS，后者因广泛兼容x86架构PC成为市场主流。其历史版本存在争议：部分资料称最高版本为MS-DOS 8.0（支持Windows 9x/ME），另有来源提到DOS 7.0，可能因分支版本或资料更新差异导致。</p>
+<h3 id="2-核心功能与模块结构">2. <strong>核心功能与模块结构</strong></h3>
+<ul>
+<li>
+<p><strong>功能特性</strong>：</p>
+<ul>
+<li>
+<p><strong>磁盘与文件管理</strong>：采用FAT（文件分配表）管理磁盘文件，支持目录树结构，便于文件组织。</p>
+</li>
+<li>
+<p><strong>设备驱动</strong>：通过配置文件（如CONFIG.SYS）加载外部设备驱动模块，实现打印机、磁盘驱动器等硬件控制。</p>
+</li>
+<li>
+<p><strong>命令行交互</strong>：用户需记忆命令（如DIR显示目录、COPY复制文件）完成操作，缺乏图形界面直观性。</p>
+</li>
+<li>
+<p><strong>单用户单任务</strong>：仅支持单用户同时运行一个程序，与多任务系统（如Windows）形成对比。</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>模块组成</strong>：<br>
+DOS采用分层模块结构，主要包括：</p>
+<ul>
+<li>
+<p><strong>引导程序（Boot Record）</strong> ：位于磁盘0磁道，负责加载系统模块。</p>
+</li>
+<li>
+<p><strong>输入/输出管理模块（IO.SYS）</strong> ：控制底层硬件通信，直接与BIOS交互。</p>
+</li>
+<li>
+<p><strong>文件管理模块（MSDOS.SYS）</strong> ：系统核心，处理文件存储、目录结构及资源分配。</p>
+</li>
+<li>
+<p><strong>命令处理模块（COMMAND.COM ）</strong> ：解析并执行用户输入的命令，包含内部命令（如DIR、DEL）。<br>
+部分资料补充了ROM中的BIOS模块作为底层支持，体现软硬件协同设计。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-发展演变与现状">3. <strong>发展演变与现状</strong></h3>
+<ul>
+<li>
+<p><strong>被Windows取代</strong>：随着图形界面兴起，早期Windows（如Windows 3.x/95）基于DOS运行，后逐渐独立为32位系统（如Windows NT）。Windows至今保留“命令提示符”模拟DOS环境，支持部分命令。</p>
+</li>
+<li>
+<p><strong>遗留应用</strong>：尽管退出主流市场，DOS仍在<strong>嵌入式系统</strong>、<strong>工业控制</strong>及特定教育场景（如计算机原理教学）中发挥作用。其文件管理概念（如目录路径）对现代操作系统影响深远。</p>
+</li>
+</ul>
+<h3 id="4-优缺点总结">4. <strong>优缺点总结</strong></h3>
+<ul>
+<li>
+<p><strong>优点</strong>：硬件需求低（640KB内存即可运行）、运行高效稳定、文件管理灵活。</p>
+</li>
+<li>
+<p><strong>缺点</strong>：用户体验门槛高（需记忆命令）、功能局限（不支持多任务/多媒体）、维护复杂。</p>
+</li>
+</ul>
+<p>综上，DOS作为计算机发展史上的里程碑，奠定了命令行操作与文件管理的基础，其设计理念仍隐含于现代操作系统中，具有重要的历史与技术教育价值。</p>
+<p><a href="http://192.168.0.102:8010/archives/kai-yuan-ruan-jian" title="开源软件（Open Source Software vs 自由软件（Free Software）"><br>
+</a></p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://huts1234.github.io/docker/">
+                  <h3 class="post-title">
+                    Docker
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

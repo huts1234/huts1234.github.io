@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>root | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://huts1234.github.io/favicon.ico?v=1764722134508">
+<link rel="stylesheet" href="https://huts1234.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="Android Root 完全指南：解锁设备的终极控制权
+
+一、Root 的核心概念与风险
+1. 什么是 Root？
+
+定义：获取 Android 系统的超级用户权限（类似 Linux 的 root），允许修改系统分区和底层设置
+核心工具：..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://huts1234.github.io">
+        <img src="https://huts1234.github.io/images/avatar.png?v=1764722134508" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://huts1234.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">root</h2>
+            <div class="post-date">2025-11-28</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="android-root-完全指南解锁设备的终极控制权">Android Root 完全指南：解锁设备的终极控制权</h1>
+<hr>
+<h2 id="一-root-的核心概念与风险">一、Root 的核心概念与风险</h2>
+<h3 id="1-什么是-root">1. 什么是 Root？</h3>
+<ul>
+<li><strong>定义</strong>：获取 Android 系统的<strong>超级用户权限</strong>（类似 Linux 的 <code>root</code>），允许修改系统分区和底层设置</li>
+<li><strong>核心工具</strong>：Magisk（主流方案）、SuperSU（已停止维护）</li>
+<li><strong>主要用途</strong>：
+<ul>
+<li>卸载预装软件（Bloatware）</li>
+<li>深度定制系统（内核调优、主题引擎）</li>
+<li>使用需要 Root 的高级应用（Tasker、Greenify）</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-风险与注意事项">2. 风险与注意事项</h3>
+<table>
+<thead>
+<tr>
+<th><strong>风险类型</strong></th>
+<th><strong>应对方案</strong></th>
+<th><strong>影响等级</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>设备变砖</td>
+<td>提前备份数据，熟悉救砖流程（Fastboot/EDL模式）</td>
+<td>高</td>
+</tr>
+<tr>
+<td>保修失效</td>
+<td>部分厂商允许重新锁定 Bootloader（如 Google Pixel）</td>
+<td>中</td>
+</tr>
+<tr>
+<td>安全漏洞</td>
+<td>使用 Magisk 隐藏 Root 状态（Magisk Hide）</td>
+<td>高</td>
+</tr>
+<tr>
+<td>OTA 更新失败</td>
+<td>通过 Magisk 保留 Root 更新（A/B 分区设备）</td>
+<td>中</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="二-root-前的准备工作">二、Root 前的准备工作</h2>
+<h3 id="1-必备条件">1. 必备条件</h3>
+<ul>
+<li><strong>解锁 Bootloader</strong>（不同品牌差异大）：
+<ul>
+<li><strong>小米</strong>：申请解锁权限（等待 7-15 天）</li>
+<li><strong>三星</strong>：触发 Knox 熔断（永久丧失保修）</li>
+<li><strong>谷歌</strong>：<code>fastboot flashing unlock</code></li>
+</ul>
+</li>
+<li><strong>下载工具包</strong>：
+<ul>
+<li><a href="https://github.com/topjohnwu/Magisk/releases">Magisk 最新版</a></li>
+<li>设备对应的 TWRP Recovery 镜像</li>
+<li>设备完整固件包（用于故障恢复）</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-数据备份指南">2. 数据备份指南</h3>
+<ul>
+<li><strong>应用数据</strong>：使用 <code>adb backup -apk -shared -all</code></li>
+<li><strong>全盘备份</strong>：TWRP → Backup → 勾选所有分区（需 Root 后操作）</li>
+<li><strong>云同步</strong>：通讯录、照片等上传至 Google Drive 或第三方网盘</li>
+</ul>
+<hr>
+<h2 id="三-magisk-root-详细步骤通用流程">三、Magisk Root 详细步骤（通用流程）</h2>
+<h3 id="1-提取-boot-镜像">1. 提取 Boot 镜像</h3>
+<pre><code class="language-bash"># 解压官方固件包，找到 boot.img 或 init_boot.img（Android 13+）
+unzip firmware.zip
+</code></pre>
+<h3 id="2-修补-boot-镜像">2. 修补 Boot 镜像</h3>
+<ol>
+<li>将 <code>boot.img</code> 复制到手机存储</li>
+<li>安装 Magisk App → 选择&quot;安装&quot; → &quot;选择并修补文件&quot; → 选中 <code>boot.img</code></li>
+<li>生成 <code>magisk_patched-xxxxx.img</code> 并传回电脑</li>
+</ol>
+<h3 id="3-刷入修补后的镜像">3. 刷入修补后的镜像</h3>
+<pre><code class="language-bash">adb reboot bootloader
+fastboot flash boot magisk_patched-xxxxx.img  # 或 fastboot flash init_boot
+fastboot reboot
+</code></pre>
+<h3 id="4-验证-root-状态">4. 验证 Root 状态</h3>
+<ul>
+<li>打开 Magisk App → 首页显示当前版本且&quot;已安装&quot;</li>
+<li>使用 Root Checker 应用确认权限</li>
+</ul>
+<hr>
+<h2 id="四-root-后的优化与防护">四、Root 后的优化与防护</h2>
+<h3 id="1-必装模块推荐">1. 必装模块推荐</h3>
+<table>
+<thead>
+<tr>
+<th><strong>模块名称</strong></th>
+<th><strong>功能描述</strong></th>
+<th><strong>下载源</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MagiskHide Props Config</td>
+<td>修改设备指纹绕过 SafetyNet</td>
+<td>Magisk 仓库</td>
+</tr>
+<tr>
+<td>Universal SafetyNet Fix</td>
+<td>修复 Android 13+ 的 SafetyNet 问题</td>
+<td>GitHub</td>
+</tr>
+<tr>
+<td>Systemless Hosts</td>
+<td>广告屏蔽（需配合 AdAway）</td>
+<td>Magisk 仓库</td>
+</tr>
+<tr>
+<td>Riru - LSposed</td>
+<td>启用 Xposed 框架功能</td>
+<td>GitHub</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-安全防护措施">2. 安全防护措施</h3>
+<ul>
+<li><strong>权限管理</strong>：使用 <a href="https://github.com/Chainfire/supersu">SuperUser</a> 或 Magisk 的&quot;超级用户&quot;列表，禁止可疑应用获取 Root</li>
+<li><strong>定期更新</strong>：关注 Magisk 的 Canary 频道获取最新修复</li>
+<li><strong>防火墙规则</strong>：通过 AFWall+ 限制 Root 应用的网络访问</li>
+</ul>
+<hr>
+<h2 id="五-常见问题解决">五、常见问题解决</h2>
+<h3 id="1-root-后银行-app-无法运行">1. Root 后银行 App 无法运行</h3>
+<ul>
+<li><strong>解决方案</strong>：
+<ol>
+<li>Magisk → 设置 → 启用&quot;Magisk Hide&quot;</li>
+<li>安装&quot;Universal SafetyNet Fix&quot;模块</li>
+<li>使用&quot;Hide My Applist&quot;隐藏 Root 相关进程</li>
+</ol>
+</li>
+</ul>
+<h3 id="2-ota-更新失败">2. OTA 更新失败</h3>
+<ul>
+<li><strong>保留 Root 更新步骤</strong>：
+<ol>
+<li>卸载所有 Magisk 模块</li>
+<li>Magisk → 卸载 → &quot;还原原厂镜像&quot;</li>
+<li>进行 OTA 更新</li>
+<li>重新修补新版本的 Boot 镜像</li>
+</ol>
+</li>
+</ul>
+<h3 id="3-误删系统文件导致崩溃">3. 误删系统文件导致崩溃</h3>
+<ul>
+<li><strong>恢复方法</strong>：
+<ol>
+<li>进入 TWRP → Advanced → File Manager</li>
+<li>从备份或固件包中复制缺失文件到 <code>/system</code></li>
+<li>修改权限为 <code>644</code>（rw-r--r--）</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h2 id="六-高阶玩法自定义内核与模块开发">六、高阶玩法：自定义内核与模块开发</h2>
+<h3 id="1-编译内核添加功能">1. 编译内核添加功能</h3>
+<pre><code class="language-bash"># 克隆内核源码
+git clone https://github.com/your-device-kernel.git
+make ARCH=arm64 O=out your_device_defconfig
+make -j$(nproc) ARCH=arm64 O=out CROSS_COMPILE=aarch64-linux-android-
+
+# 刷入内核
+fastboot flash boot Image.gz-dtb
+</code></pre>
+<h3 id="2-开发-magisk-模块">2. 开发 Magisk 模块</h3>
+<ul>
+<li><strong>模板结构</strong>：<pre><code class="language-bash">/模块名
+├── system
+│   └── etc
+│       └── hosts  # 替换系统文件
+└── module.prop    # 元数据配置
+</code></pre>
+</li>
+<li><strong>打包发布</strong>：压缩为 <code>.zip</code> 并签名</li>
+</ul>
+<hr>
+<p><strong>警告</strong>：Root 操作可能导致不可逆后果，仅建议技术用户尝试。合法合规使用 Root 权限，禁止用于破解付费应用或侵犯隐私。 🔒🔧</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://huts1234.github.io/recovery/">
+                  <h3 class="post-title">
+                    Recovery
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

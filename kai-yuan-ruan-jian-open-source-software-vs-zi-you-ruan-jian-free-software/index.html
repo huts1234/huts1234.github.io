@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>开源软件（Open Source Software vs 自由软件（Free Software） | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://huts1234.github.io/favicon.ico?v=1764722134508">
+<link rel="stylesheet" href="https://huts1234.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="1. 核心定义
+
+
+
+类别
+定义
+
+
+
+
+开源软件
+源代码公开，允许用户查看、修改、分发，但不一定强调用户自由。
+
+
+自由软件
+强调用户拥有四大自由（使用、研究、修改、分发），伦理导向优先。
+
+
+
+
+2. 历史与哲学差异
+2.1 起源
+
+
+..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://huts1234.github.io">
+        <img src="https://huts1234.github.io/images/avatar.png?v=1764722134508" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://huts1234.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">开源软件（Open Source Software vs 自由软件（Free Software）</h2>
+            <div class="post-date">2025-11-28</div>
+            
+            <div class="post-content" v-pre>
+              <h2 id="1-核心定义">1. 核心定义</h2>
+<table>
+<thead>
+<tr>
+<th><strong>类别</strong></th>
+<th><strong>定义</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>开源软件</strong></td>
+<td>源代码公开，允许用户<strong>查看、修改、分发</strong>，但<strong>不一定强调用户自由</strong>。</td>
+</tr>
+<tr>
+<td><strong>自由软件</strong></td>
+<td>强调用户拥有<strong>四大自由</strong>（使用、研究、修改、分发），<strong>伦理导向</strong>优先。</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="2-历史与哲学差异">2. 历史与哲学差异</h2>
+<h3 id="21-起源">2.1 起源</h3>
+<ul>
+<li>
+<p><strong>自由软件</strong>（1983年）：</p>
+<ul>
+<li>由Richard Stallman发起，成立<strong>GNU计划</strong>，抗议软件私有化。</li>
+<li>标志性事件：开发GCC编译器、GPL许可证。</li>
+<li><strong>哲学核心</strong>：软件自由是基本人权，反对剥夺用户控制权的专有软件。</li>
+</ul>
+</li>
+<li>
+<p><strong>开源软件</strong>（1998年）：</p>
+<ul>
+<li>由Eric S. Raymond等人提出，旨在推广协作开发模式。</li>
+<li>标志性事件：《大教堂与市集》出版，成立OSI（开源倡议组织）。</li>
+<li><strong>哲学核心</strong>：开放代码能带来技术优势（质量、效率），弱化伦理争议。</li>
+</ul>
+</li>
+</ul>
+<h3 id="22-核心理念对比">2.2 核心理念对比</h3>
+<table>
+<thead>
+<tr>
+<th><strong>方面</strong></th>
+<th><strong>自由软件</strong></th>
+<th><strong>开源软件</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>目标</strong></td>
+<td>保护用户自由（伦理优先）</td>
+<td>提升代码质量与协作效率（实用优先）</td>
+</tr>
+<tr>
+<td><strong>许可证要求</strong></td>
+<td>严格（必须保持衍生作品自由）</td>
+<td>灵活（允许部分限制性使用）</td>
+</tr>
+<tr>
+<td><strong>商业兼容性</strong></td>
+<td>低（GPL具有“传染性”）</td>
+<td>高（MIT/BSD允许闭源衍生）</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="3-典型许可证对比">3. 典型许可证对比</h2>
+<h3 id="31-自由软件许可证">3.1 自由软件许可证</h3>
+<ul>
+<li>
+<p><strong>GPL（GNU通用公共许可证）</strong>：</p>
+<ul>
+<li><strong>要求</strong>：任何基于GPL代码的衍生作品必须<strong>开源并采用GPL</strong>。</li>
+<li><strong>案例</strong>：Linux内核、GNU工具链（gcc、glibc）。</li>
+<li><strong>影响</strong>：阻止代码被闭源商业利用，保障用户自由。</li>
+</ul>
+</li>
+<li>
+<p><strong>AGPL（Affero GPL）</strong>：</p>
+<ul>
+<li><strong>扩展</strong>：覆盖网络服务（SaaS），要求服务端代码开源。</li>
+<li><strong>案例</strong>：MongoDB（曾改用SSPL，后引发争议）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="32-开源软件许可证">3.2 开源软件许可证</h3>
+<ul>
+<li>
+<p><strong>MIT许可证</strong>：</p>
+<ul>
+<li><strong>允许</strong>：自由使用、修改、闭源分发，仅需保留版权声明。</li>
+<li><strong>案例</strong>：React（早期）、Ruby on Rails。</li>
+</ul>
+</li>
+<li>
+<p><strong>Apache 2.0</strong>：</p>
+<ul>
+<li><strong>附加条款</strong>：明确专利授权，禁止商标滥用。</li>
+<li><strong>案例</strong>：Apache HTTP Server、Kubernetes。</li>
+</ul>
+</li>
+<li>
+<p><strong>BSD许可证</strong>：</p>
+<ul>
+<li><strong>宽松性</strong>：允许闭源，仅需保留版权声明。</li>
+<li><strong>案例</strong>：FreeBSD、Redis（早期）。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="4-关键争议与影响">4. 关键争议与影响</h2>
+<h3 id="41-自由软件的传染性争议">4.1 自由软件的“传染性”争议</h3>
+<ul>
+<li><strong>问题</strong>：GPL要求衍生作品开源，导致商业公司避免使用GPL代码。</li>
+<li><strong>案例</strong>：
+<ul>
+<li>微软曾称Linux为“癌症”（2001年），后逐步拥抱开源（如VS Code MIT协议）。</li>
+<li>特斯拉车载系统基于Linux（GPL），被迫开源部分驱动代码。</li>
+</ul>
+</li>
+</ul>
+<h3 id="42-开源与商业化的平衡">4.2 开源与商业化的平衡</h3>
+<ul>
+<li><strong>商业模式</strong>：
+<ul>
+<li><strong>开源核心+付费服务</strong>（Red Hat、MongoDB）。</li>
+<li><strong>开放核心（Open Core）</strong>：基础功能开源，高级功能闭源（GitLab、Elasticsearch）。</li>
+</ul>
+</li>
+<li><strong>争议点</strong>：
+<ul>
+<li><strong>SSPL（服务器端公共许可证）</strong>：MongoDB为限制云厂商而定制，被OSI拒绝认定为开源。</li>
+<li><strong>Redis许可变更</strong>：从BSD转向RSAL（Redis Source Available License），引发社区不满。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="5-代表性项目与生态">5. 代表性项目与生态</h2>
+<h3 id="51-自由软件生态">5.1 自由软件生态</h3>
+<ul>
+<li>
+<p><strong>GNU/Linux系统</strong>：</p>
+<ul>
+<li>核心组件：Linux内核（GPL）、GNU工具链（GPL）、GNOME桌面（LGPL）。</li>
+<li>发行版：Debian（严格遵循自由软件准则）、Fedora（包含部分非自由驱动）。</li>
+</ul>
+</li>
+<li>
+<p><strong>GPL主导领域</strong>：</p>
+<ul>
+<li>开发工具：GCC、GDB、Make。</li>
+<li>应用软件：GIMP、Audacity（早期版本）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="52-开源软件生态">5.2 开源软件生态</h3>
+<ul>
+<li><strong>宽松许可证项目</strong>：
+<ul>
+<li><strong>基础设施</strong>：Kubernetes（Apache 2.0）、React（MIT）、Vue.js（MIT）。</li>
+<li><strong>数据库</strong>：PostgreSQL（BSD）、MySQL（GPL，但商业版闭源）。</li>
+</ul>
+</li>
+<li><strong>企业主导项目</strong>：
+<ul>
+<li>Google：Android（Apache 2.0）、Chromium（BSD）。</li>
+<li>Microsoft：.NET Core（MIT）、VS Code（MIT）。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="6-如何选择许可证">6. 如何选择许可证？</h2>
+<h3 id="61-决策因素">6.1 决策因素</h3>
+<table>
+<thead>
+<tr>
+<th><strong>目标</strong></th>
+<th><strong>推荐许可证</strong></th>
+<th><strong>理由</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最大化用户自由</td>
+<td>GPL v3</td>
+<td>强制衍生作品保持开源</td>
+</tr>
+<tr>
+<td>吸引企业贡献</td>
+<td>Apache 2.0</td>
+<td>明确的专利授权降低法律风险</td>
+</tr>
+<tr>
+<td>快速普及与商业化</td>
+<td>MIT/BSD</td>
+<td>允许闭源，适合商业友好场景</td>
+</tr>
+<tr>
+<td>限制云厂商“白嫖”</td>
+<td>SSPL/RSAL</td>
+<td>自定义条款限制SaaS提供商使用</td>
+</tr>
+</tbody>
+</table>
+<h3 id="62-工具推荐">6.2 工具推荐</h3>
+<ul>
+<li><strong>SPDX License List</strong>：标准化许可证标识（<a href="https://spdx.org/licenses/">https://spdx.org/licenses/</a>）。</li>
+<li><strong>Choose a License</strong>：交互式选择工具（<a href="https://choosealicense.com/">https://choosealicense.com/</a>）。</li>
+</ul>
+<hr>
+<h2 id="7-总结">7. 总结</h2>
+<ul>
+<li><strong>自由软件</strong>是<strong>道德运动</strong>，强调用户权利不可侵犯；<strong>开源软件</strong>是<strong>方法论</strong>，关注协作效率与技术优势。</li>
+<li><strong>许可证选择</strong>直接影响项目生态与商业化潜力，需权衡自由、协作、商业利益。</li>
+<li><strong>未来趋势</strong>：随着云原生和SaaS兴起，新型许可证（如SSPL、BSL）正在挑战传统开源定义。</li>
+</ul>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://huts1234.github.io/kai-yuan-shi-ji/">
+                  <h3 class="post-title">
+                    开源史记
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

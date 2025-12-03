@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>MAC | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://huts1234.github.io/favicon.ico?v=1764722134508">
+<link rel="stylesheet" href="https://huts1234.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="MAC（媒体访问控制地址）深度解析
+
+一、MAC地址的定义与结构
+MAC地址（Media Access Control Address）是网络设备在数据链路层的唯一硬件标识符，用于局域网内设备间的直接通信。其核心特性包括：
+
+48位长度：通..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://huts1234.github.io">
+        <img src="https://huts1234.github.io/images/avatar.png?v=1764722134508" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://huts1234.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">MAC</h2>
+            <div class="post-date">2025-11-28</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="mac媒体访问控制地址深度解析">MAC（媒体访问控制地址）深度解析</h1>
+<hr>
+<h2 id="一-mac地址的定义与结构">一、MAC地址的定义与结构</h2>
+<p><strong>MAC地址</strong>（Media Access Control Address）是网络设备在数据链路层的唯一硬件标识符，用于<strong>局域网内设备间的直接通信</strong>。其核心特性包括：</p>
+<ul>
+<li><strong>48位长度</strong>：通常表示为12位十六进制数（如<code>00:1A:3F:2B:08:15</code>）</li>
+<li><strong>全球唯一性</strong>：由IEEE统一分配，前24位为<strong>OUI</strong>（组织唯一标识符），后24位由厂商自定义</li>
+<li><strong>不可路由性</strong>：仅在本地网络有效，跨网络需依赖IP协议</li>
+</ul>
+<hr>
+<h2 id="二-mac地址的类型与用途">二、MAC地址的类型与用途</h2>
+<h3 id="1-地址分类">1. 地址分类</h3>
+<table>
+<thead>
+<tr>
+<th><strong>类型</strong></th>
+<th><strong>格式</strong></th>
+<th><strong>用途</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>单播地址</strong></td>
+<td>首字节最低位为0（如00:1A）</td>
+<td>一对一通信（目标设备唯一响应）</td>
+</tr>
+<tr>
+<td><strong>多播地址</strong></td>
+<td>首字节最低位为1（如01:00）</td>
+<td>一对多通信（如OSPF路由协议）</td>
+</tr>
+<tr>
+<td><strong>广播地址</strong></td>
+<td>FF:FF:FF:FF:FF:FF</td>
+<td>全网广播（ARP请求、DHCP发现）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-核心应用场景">2. 核心应用场景</h3>
+<ul>
+<li><strong>ARP协议</strong>：通过MAC地址解析IP对应的物理地址</li>
+<li><strong>交换机转发</strong>：学习MAC地址表（端口与地址映射）</li>
+<li><strong>设备过滤</strong>：企业网络基于MAC地址的接入控制（MAC白名单）</li>
+<li><strong>设备追踪</strong>：零售场所通过Wi-Fi探针统计客流量（需用户授权）</li>
+</ul>
+<hr>
+<h2 id="三-mac地址的查看与管理">三、MAC地址的查看与管理</h2>
+<h3 id="1-查看方法">1. 查看方法</h3>
+<table>
+<thead>
+<tr>
+<th><strong>系统</strong></th>
+<th><strong>命令/操作</strong></th>
+<th><strong>示例输出</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td><code>ipconfig /all</code></td>
+<td><code>物理地址. . . . . . . . . : 00-1A-3F-2B-08-15</code></td>
+</tr>
+<tr>
+<td>Linux/macOS</td>
+<td><code>ifconfig</code> 或 <code>ip link show</code></td>
+<td><code>link/ether 00:1a:3f:2b:08:15</code></td>
+</tr>
+<tr>
+<td>Android</td>
+<td>设置 → 关于手机 → 状态信息</td>
+<td>WLAN MAC地址：00:1A:3F:2B:08:15</td>
+</tr>
+<tr>
+<td>iOS</td>
+<td>设置 → 通用 → 关于本机 → Wi-Fi地址</td>
+<td>Wi-Fi地址：00-1A-3F-2B-08-15</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-地址修改临时">2. 地址修改（临时）</h3>
+<ul>
+<li><strong>Windows</strong>：<br>
+设备管理器 → 网络适配器 → 高级 → 网络地址 → 输入新值</li>
+<li><strong>Linux</strong>：<pre><code class="language-bash">sudo ip link set dev eth0 down
+sudo ip link set dev eth0 address 00:1A:3F:2B:08:16
+sudo ip link set dev eth0 up
+</code></pre>
+</li>
+<li><strong>风险</strong>：可能导致网络服务中断或设备识别冲突</li>
+</ul>
+<hr>
+<h2 id="四-mac地址与隐私安全">四、MAC地址与隐私安全</h2>
+<h3 id="1-隐私泄露风险">1. 隐私泄露风险</h3>
+<ul>
+<li><strong>设备追踪</strong>：公共WiFi记录MAC地址关联用户行为</li>
+<li><strong>位置追踪</strong>：商场通过蓝牙/WiFi探针收集MAC地址分析客流</li>
+</ul>
+<h3 id="2-防护措施">2. 防护措施</h3>
+<table>
+<thead>
+<tr>
+<th><strong>技术</strong></th>
+<th><strong>原理</strong></th>
+<th><strong>支持场景</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>随机化MAC</strong></td>
+<td>每次连接生成临时MAC地址</td>
+<td>iOS 14+/Android 10+、Windows 11</td>
+</tr>
+<tr>
+<td><strong>MAC匿名化</strong></td>
+<td>设备发送数据前剥离或替换MAC地址</td>
+<td>企业网络审计工具</td>
+</tr>
+<tr>
+<td><strong>网络层加密</strong></td>
+<td>使用VPN/HTTPS隐藏实际通信内容</td>
+<td>所有网络应用</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="五-mac地址与ip地址的协作">五、MAC地址与IP地址的协作</h2>
+<h3 id="1-arp协议工作流程">1. ARP协议工作流程</h3>
+<ol>
+<li><strong>设备A</strong>（IP:192.168.1.100）欲访问<strong>设备B</strong>（IP:192.168.1.200）</li>
+<li><strong>A</strong>广播ARP请求：“谁有192.168.1.200的MAC地址？”</li>
+<li><strong>B</strong>响应：“我是192.168.1.200，MAC是00:1A:3F:2B:08:15”</li>
+<li><strong>A</strong>缓存此映射，后续通信直接使用MAC地址封装帧</li>
+</ol>
+<h3 id="2-协议依赖关系">2. 协议依赖关系</h3>
+<table>
+<thead>
+<tr>
+<th><strong>层</strong></th>
+<th><strong>协议</strong></th>
+<th><strong>地址类型</strong></th>
+<th><strong>作用</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据链路层</td>
+<td>Ethernet</td>
+<td>MAC地址</td>
+<td>本地网络设备间直接通信</td>
+</tr>
+<tr>
+<td>网络层</td>
+<td>IP</td>
+<td>IP地址</td>
+<td>跨网络路由寻址</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="六-特殊mac地址段">六、特殊MAC地址段</h2>
+<table>
+<thead>
+<tr>
+<th><strong>OUI前缀</strong></th>
+<th><strong>厂商</strong></th>
+<th><strong>示例设备</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>00:16:CB</td>
+<td>Google</td>
+<td>Nest路由器、Chromecast</td>
+</tr>
+<tr>
+<td>84:38:35</td>
+<td>Apple</td>
+<td>iPhone、MacBook</td>
+</tr>
+<tr>
+<td>70:48:8F</td>
+<td>Microsoft</td>
+<td>Surface设备、Xbox</td>
+</tr>
+<tr>
+<td>DC:44:27</td>
+<td>Huawei</td>
+<td>手机、路由器</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p>MAC地址作为网络通信的基石，虽在IP协议普及后重要性相对下降，但其在局域网管理、设备识别与隐私保护中仍扮演关键角色。 🔍🔒</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://huts1234.github.io/freebsd/">
+                  <h3 class="post-title">
+                    FreeBSD
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

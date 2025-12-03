@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>内网穿透 | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://huts1234.github.io/favicon.ico?v=1764722134508">
+<link rel="stylesheet" href="https://huts1234.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="一、内网穿透的核心需求
+内网穿透（NAT Traversal）用于在无公网IP或防火墙限制的情况下，实现外网访问内网服务。典型场景包括：
+
+🌐 家庭NAS远程访问
+🖥️ 本地开发环境外网演示
+📡 IoT设备远程控制
+🎮 自建游戏服务..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://huts1234.github.io">
+        <img src="https://huts1234.github.io/images/avatar.png?v=1764722134508" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://huts1234.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">内网穿透</h2>
+            <div class="post-date">2025-11-28</div>
+            
+            <div class="post-content" v-pre>
+              <h2 id="一-内网穿透的核心需求">一、内网穿透的核心需求</h2>
+<p><strong>内网穿透</strong>（NAT Traversal）用于在无公网IP或防火墙限制的情况下，实现外网访问内网服务。典型场景包括：</p>
+<ul>
+<li>🌐 家庭NAS远程访问</li>
+<li>🖥️ 本地开发环境外网演示</li>
+<li>📡 IoT设备远程控制</li>
+<li>🎮 自建游戏服务器联机</li>
+</ul>
+<hr>
+<h2 id="二-主流内网穿透方案对比">二、主流内网穿透方案对比</h2>
+<table>
+<thead>
+<tr>
+<th><strong>方案</strong></th>
+<th><strong>原理</strong></th>
+<th><strong>优点</strong></th>
+<th><strong>缺点</strong></th>
+<th><strong>适用场景</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>反向代理</strong></td>
+<td>通过公网服务器转发流量</td>
+<td>配置简单，支持HTTPS</td>
+<td>依赖第三方服务器，延迟高</td>
+<td>临时测试、低频率访问</td>
+</tr>
+<tr>
+<td><strong>P2P直连</strong></td>
+<td>利用STUN/TURN穿透NAT建立点对点连接</td>
+<td>延迟低，不依赖中继</td>
+<td>需要NAT类型支持（全锥型）</td>
+<td>实时通信（视频会议、游戏）</td>
+</tr>
+<tr>
+<td><strong>VPN隧道</strong></td>
+<td>建立虚拟专用网络连接内网</td>
+<td>安全，支持全端口访问</td>
+<td>需要客户端安装软件</td>
+<td>企业远程办公</td>
+</tr>
+<tr>
+<td><strong>UPnP自动映射</strong></td>
+<td>路由器自动配置端口转发规则</td>
+<td>零配置，直接内网服务</td>
+<td>需路由支持且存在安全风险</td>
+<td>支持UPnP的家庭网络</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="三-常用工具与配置">三、常用工具与配置</h2>
+<h3 id="1-反向代理工具">1. 反向代理工具</h3>
+<h4 id="ngrok适合快速测试"><strong>Ngrok</strong>（适合快速测试）</h4>
+<pre><code class="language-bash"># 安装Ngrok客户端
+curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc &gt;/dev/null
+echo &quot;deb https://ngrok-agent.s3.amazonaws.com buster main&quot; | sudo tee /etc/apt/sources.list.d/ngrok.list
+sudo apt update &amp;&amp; sudo apt install ngrok
+
+# 启动HTTP代理（需注册获取token）
+ngrok config add-authtoken &lt;YOUR_AUTHTOKEN&gt;
+ngrok http 80
+</code></pre>
+<ul>
+<li><strong>生成域名</strong>：<code>https://abc123.ngrok-free.app</code> → 映射到本地<code>80</code>端口</li>
+</ul>
+<h4 id="frp自建中转推荐长期使用"><strong>Frp</strong>（自建中转，推荐长期使用）</h4>
+<pre><code class="language-ini"># frps.ini（公网服务器配置）
+[common]
+bind_port = 7000
+vhost_http_port = 8080
+
+# frpc.ini（内网客户端配置）
+[common]
+server_addr = x.x.x.x
+server_port = 7000
+
+[web]
+type = http
+local_port = 80
+custom_domains = www.yourdomain.com
+</code></pre>
+<ul>
+<li><strong>访问</strong>：<code>http://x.x.x.x:8080</code> → 转发到内网<code>80</code>端口</li>
+</ul>
+<h3 id="2-p2p工具">2. P2P工具</h3>
+<h4 id="zerotier虚拟局域网"><strong>ZeroTier</strong>（虚拟局域网）</h4>
+<ol>
+<li>官网创建网络（https://www.zerotier.com/）</li>
+<li>安装客户端：</li>
+</ol>
+<pre><code class="language-bash">curl -s https://install.zerotier.com | sudo bash
+zerotier-cli join &lt;NETWORK_ID&gt;
+</code></pre>
+<ol start="3">
+<li>授权设备 → 通过虚拟IP（如<code>172.24.0.5</code>）直连</li>
+</ol>
+<h4 id="tailscale基于wireguard"><strong>Tailscale</strong>（基于WireGuard）</h4>
+<pre><code class="language-bash"># 安装并登录
+curl -fsSL https://tailscale.com/install.sh | sh
+tailscale up
+</code></pre>
+<ul>
+<li><strong>特性</strong>：自动NAT穿透，支持出口节点（Exit Node）</li>
+</ul>
+<hr>
+<h2 id="四-高级配置与优化">四、高级配置与优化</h2>
+<h3 id="1-提升安全性">1. 提升安全性</h3>
+<ul>
+<li><strong>HTTPS加密</strong>：使用Caddy/Nginx反向代理添加SSL证书<pre><code class="language-nginx">server {
+    listen 443 ssl;
+    server_name tunnel.example.com;
+    ssl_certificate /path/to/fullchain.pem;
+    ssl_certificate_key /path/to/privkey.pem;
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+    }
+}
+</code></pre>
+</li>
+<li><strong>IP白名单</strong>：仅允许指定IP访问转发端口<pre><code class="language-bash">iptables -A INPUT -p tcp --dport 8080 -s 123.123.123.123 -j ACCEPT
+iptables -A INPUT -p tcp --dport 8080 -j DROP
+</code></pre>
+</li>
+</ul>
+<h3 id="2-稳定性优化">2. 稳定性优化</h3>
+<ul>
+<li><strong>心跳保活</strong>：配置Frpc定时发送心跳包<pre><code class="language-ini">[common]
+tcp_mux = true
+heartbeat_interval = 30
+heartbeat_timeout = 90
+</code></pre>
+</li>
+<li><strong>多路复用</strong>：减少TCP连接数，提升并发性能</li>
+</ul>
+<hr>
+<h2 id="五-ipv6环境下的内网穿透">五、IPv6环境下的内网穿透</h2>
+<h3 id="1-直接访问无需穿透">1. 直接访问（无需穿透）</h3>
+<ul>
+<li><strong>条件</strong>：设备拥有全球单播IPv6地址（如<code>2408:1234:5678::100</code>）</li>
+<li><strong>配置</strong>：开放防火墙端口，直接通过IPv6地址访问<pre><code class="language-bash"># Linux开放80端口
+ip6tables -A INPUT -p tcp --dport 80 -j ACCEPT
+</code></pre>
+</li>
+</ul>
+<h3 id="2-混合环境穿透">2. 混合环境穿透</h3>
+<ul>
+<li><strong>工具选择</strong>：使用支持双栈的工具（如Cloudflare Tunnel）<pre><code class="language-bash">cloudflared tunnel --url http://localhost:80 --hostname tunnel.example.com
+</code></pre>
+</li>
+<li><strong>优势</strong>：自动优选IPv4/IPv6路径，提升连接成功率</li>
+</ul>
+<hr>
+<h2 id="六-自建内网穿透服务器">六、自建内网穿透服务器</h2>
+<h3 id="1-架构设计">1. 架构设计</h3>
+<ul>
+<li><strong>组件</strong>：
+<ul>
+<li><strong>中转服务器</strong>（VPS，1核1G↑，带宽≥5Mbps）</li>
+<li><strong>客户端</strong>（内网设备运行Frpc/NaiveProxy）</li>
+</ul>
+</li>
+<li><strong>协议选择</strong>：
+<ul>
+<li><strong>TCP/UDP</strong>：基础转发</li>
+<li><strong>WebSocket</strong>：绕过HTTP代理限制</li>
+<li><strong>KCP</strong>：加速高延迟网络</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-性能监控">2. 性能监控</h3>
+<ul>
+<li><strong>指标</strong>：带宽使用、并发连接数、延迟</li>
+<li><strong>工具</strong>：Prometheus + Grafana（可视化报警）</li>
+</ul>
+<hr>
+<p>内网穿透技术极大扩展了内网服务的可用性，根据需求选择合适方案，结合安全措施可实现高效稳定的远程访问。 🔧🌐</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://huts1234.github.io/mu-ma-bing-du/">
+                  <h3 class="post-title">
+                    木马病毒
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

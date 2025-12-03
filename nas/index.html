@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>nas | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://huts1234.github.io/favicon.ico?v=1764722134508">
+<link rel="stylesheet" href="https://huts1234.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="NAS（网络附加存储）全面指南
+
+一、NAS的核心定义与优势
+NAS（Network Attached Storage） 是一种通过网络提供集中数据存储与管理的专用设备，其核心优势包括：
+
+集中存储：多设备共享文件，支持PC、手机、智能电视..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://huts1234.github.io">
+        <img src="https://huts1234.github.io/images/avatar.png?v=1764722134508" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://huts1234.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">nas</h2>
+            <div class="post-date">2025-11-28</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="nas网络附加存储全面指南">NAS（网络附加存储）全面指南</h1>
+<hr>
+<h2 id="一-nas的核心定义与优势">一、NAS的核心定义与优势</h2>
+<p><strong>NAS（Network Attached Storage）</strong> 是一种通过网络提供集中数据存储与管理的专用设备，其核心优势包括：</p>
+<ul>
+<li><strong>集中存储</strong>：多设备共享文件，支持PC、手机、智能电视等访问</li>
+<li><strong>数据冗余</strong>：RAID技术防止硬盘故障导致数据丢失</li>
+<li><strong>远程访问</strong>：通过互联网随时随地存取文件</li>
+<li><strong>多功能扩展</strong>：媒体服务器、虚拟机托管、Docker容器等</li>
+</ul>
+<hr>
+<h2 id="二-nas-vs-其他存储方案对比">二、NAS vs 其他存储方案对比</h2>
+<table>
+<thead>
+<tr>
+<th><strong>类型</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>适用场景</strong></th>
+<th><strong>优缺点</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>DAS</strong></td>
+<td>直连存储（如移动硬盘）</td>
+<td>单机快速存取</td>
+<td>便携但无法共享，无冗余</td>
+</tr>
+<tr>
+<td><strong>SAN</strong></td>
+<td>存储区域网络（企业级光纤）</td>
+<td>高IO需求数据库</td>
+<td>高性能但成本高，配置复杂</td>
+</tr>
+<tr>
+<td><strong>云存储</strong></td>
+<td>在线服务（如Google Drive）</td>
+<td>轻量级文件同步</td>
+<td>依赖网络，长期使用成本高</td>
+</tr>
+<tr>
+<td><strong>NAS</strong></td>
+<td>网络附加存储</td>
+<td>家庭/中小型企业多设备共享</td>
+<td>平衡成本、功能与扩展性</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="三-nas选购核心参数">三、NAS选购核心参数</h2>
+<h3 id="1-硬件配置指南">1. 硬件配置指南</h3>
+<table>
+<thead>
+<tr>
+<th><strong>组件</strong></th>
+<th><strong>推荐规格</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CPU</strong></td>
+<td>Intel Celeron J4125 或 AMD Ryzen V1500B</td>
+<td>4核处理器支持多任务与虚拟机</td>
+</tr>
+<tr>
+<td><strong>内存</strong></td>
+<td>4GB（基础）→ 16GB（虚拟化/Docker需求）</td>
+<td>DDR4 ECC内存提升稳定性</td>
+</tr>
+<tr>
+<td><strong>硬盘位</strong></td>
+<td>4盘位（RAID 5/6平衡容量与安全）</td>
+<td>支持热插拔与SATA/NVMe SSD加速</td>
+</tr>
+<tr>
+<td><strong>网络接口</strong></td>
+<td>双2.5GbE网口（链路聚合达5Gbps）</td>
+<td>支持SMB多通道提升传输速度</td>
+</tr>
+<tr>
+<td><strong>扩展性</strong></td>
+<td>PCIe插槽（可加装10GbE网卡或SSD缓存卡）</td>
+<td>未来升级灵活性</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-主流品牌对比">2. 主流品牌对比</h3>
+<table>
+<thead>
+<tr>
+<th><strong>品牌</strong></th>
+<th><strong>代表型号</strong></th>
+<th><strong>系统特色</strong></th>
+<th><strong>适合用户</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>群晖 Synology</td>
+<td>DS923+</td>
+<td>DSM系统易用性强，套件丰富</td>
+<td>家庭及中小企业</td>
+</tr>
+<tr>
+<td>威联通 QNAP</td>
+<td>TS-464</td>
+<td>硬件性价比高，支持HDMI输出</td>
+<td>多媒体中心用户</td>
+</tr>
+<tr>
+<td>华芸 Asustor</td>
+<td>AS6704T</td>
+<td>双M.2插槽，2.5GbE网口</td>
+<td>高性能传输需求</td>
+</tr>
+<tr>
+<td>自建方案</td>
+<td>TrueNAS Core</td>
+<td>开源免费，定制灵活</td>
+<td>技术爱好者/开发者</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="四-nas核心功能与应用场景">四、NAS核心功能与应用场景</h2>
+<h3 id="1-数据管理">1. 数据管理</h3>
+<ul>
+<li><strong>文件共享</strong>：SMB/AFP/FTP协议跨平台访问</li>
+<li><strong>自动备份</strong>：Time Machine（Mac）、Active Backup（Windows）</li>
+<li><strong>版本控制</strong>：Snapshot快照恢复误删文件</li>
+</ul>
+<h3 id="2-媒体中心">2. 媒体中心</h3>
+<ul>
+<li><strong>Plex/Emby/Jellyfin</strong>：4K视频转码与流媒体播放</li>
+<li><strong>音乐库</strong>：Logitech Media Server或Roon Core集成</li>
+</ul>
+<h3 id="3-虚拟化与开发">3. 虚拟化与开发</h3>
+<ul>
+<li><strong>虚拟机</strong>：通过Virtual Machine Manager运行Linux/Windows</li>
+<li><strong>Docker</strong>：部署Nextcloud、HomeAssistant等容器</li>
+<li><strong>Git服务器</strong>：自托管代码仓库</li>
+</ul>
+<h3 id="4-安全监控">4. 安全监控</h3>
+<ul>
+<li><strong>Surveillance Station</strong>：接入IP摄像头，支持AI人脸识别</li>
+<li><strong>数据加密</strong>：AES-256加密共享文件夹，支持硬件密钥</li>
+</ul>
+<hr>
+<h2 id="五-数据安全与备份策略">五、数据安全与备份策略</h2>
+<h3 id="1-raid级别选择">1. RAID级别选择</h3>
+<table>
+<thead>
+<tr>
+<th><strong>RAID类型</strong></th>
+<th><strong>最少硬盘</strong></th>
+<th><strong>可用容量</strong></th>
+<th><strong>容错能力</strong></th>
+<th><strong>适用场景</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RAID 0</td>
+<td>2</td>
+<td>100%</td>
+<td>无</td>
+<td>临时高速存储</td>
+</tr>
+<tr>
+<td>RAID 1</td>
+<td>2</td>
+<td>50%</td>
+<td>1盘故障</td>
+<td>重要数据镜像</td>
+</tr>
+<tr>
+<td>RAID 5</td>
+<td>3</td>
+<td>(N-1)/N</td>
+<td>1盘故障</td>
+<td>平衡容量与安全</td>
+</tr>
+<tr>
+<td>RAID 6</td>
+<td>4</td>
+<td>(N-2)/N</td>
+<td>2盘故障</td>
+<td>高可靠性需求</td>
+</tr>
+<tr>
+<td>RAID 10</td>
+<td>4</td>
+<td>50%</td>
+<td>多盘故障</td>
+<td>高性能关键数据</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-3-2-1备份法则">2. 3-2-1备份法则</h3>
+<ul>
+<li><strong>3份数据</strong>：原始数据 + 2份备份</li>
+<li><strong>2种介质</strong>：NAS + 外部硬盘/云存储</li>
+<li><strong>1份异地</strong>：备份至另一建筑或云端（如Backblaze B2）</li>
+</ul>
+<hr>
+<h2 id="六-nas网络优化技巧">六、NAS网络优化技巧</h2>
+<h3 id="1-提升传输速度">1. 提升传输速度</h3>
+<ul>
+<li><strong>启用SMB多通道</strong>：合并多个网口带宽（需客户端支持）</li>
+<li><strong>SSD缓存加速</strong>：配置读写缓存（建议RAID 1的NVMe SSD）</li>
+<li><strong>调整MTU值</strong>：Jumbo Frame设为9000（需交换机支持）</li>
+</ul>
+<h3 id="2-远程访问方案">2. 远程访问方案</h3>
+<table>
+<thead>
+<tr>
+<th><strong>方式</strong></th>
+<th><strong>配置难度</strong></th>
+<th><strong>安全性</strong></th>
+<th><strong>速度</strong></th>
+<th><strong>推荐工具</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DDNS + 端口转发</td>
+<td>中等</td>
+<td>需防火墙规则</td>
+<td>依赖公网IP</td>
+<td>Synology QuickConnect</td>
+</tr>
+<tr>
+<td>VPN隧道</td>
+<td>高</td>
+<td>高（加密）</td>
+<td>中等</td>
+<td>WireGuard/OpenVPN</td>
+</tr>
+<tr>
+<td>中继服务</td>
+<td>低</td>
+<td>中（依赖第三方）</td>
+<td>低</td>
+<td>Tailscale/ZeroTier</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="七-自建nas教程truenas-core">七、自建NAS教程（TrueNAS Core）</h2>
+<h3 id="1-硬件需求">1. 硬件需求</h3>
+<ul>
+<li><strong>CPU</strong>：Intel 64位双核（推荐Xeon E3）</li>
+<li><strong>内存</strong>：8GB起步（每TB存储+1GB）</li>
+<li><strong>存储</strong>：至少2块同容量硬盘（RAID 1）</li>
+</ul>
+<h3 id="2-安装步骤">2. 安装步骤</h3>
+<ol>
+<li>下载ISO镜像：访问 <a href="https://www.truenas.com/">TrueNAS官网</a></li>
+<li>制作启动盘：使用Rufus写入U盘</li>
+<li>安装系统：选择磁盘，设置root密码</li>
+<li>创建存储池：Storage → Pools → Add → 选择与RAID类型</li>
+<li>配置共享：Shares → 设置SMB/NFS共享目录</li>
+</ol>
+<h3 id="3-插件扩展">3. 插件扩展</h3>
+<ul>
+<li><strong>Jail管理</strong>：部署Nextcloud、Plex等应用</li>
+<li><strong>虚拟机</strong>：安装Linux/Windows系统</li>
+<li><strong>监控</strong>：配置Zabbix或Prometheus</li>
+</ul>
+<hr>
+<p>NAS不仅是存储工具，更是智能数据中心的起点。根据需求合理规划，可显著提升工作效率与数字生活质量。 💾🚀</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://huts1234.github.io/markdown/">
+                  <h3 class="post-title">
+                    markdown
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

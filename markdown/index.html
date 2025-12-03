@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>markdown | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://huts1234.github.io/favicon.ico?v=1764722134508">
+<link rel="stylesheet" href="https://huts1234.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="Markdown 完全指南：从入门到精通
+
+一、Markdown 核心语法
+1. 基础元素
+
+
+
+语法
+效果
+示例
+
+
+
+
+# 标题
+一级标题
+# 一级标题 → 一级标题
+
+
+## 标题
+二级标题
+## 二级标题 → 二级标题
+
+
+**加粗..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://huts1234.github.io">
+        <img src="https://huts1234.github.io/images/avatar.png?v=1764722134508" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://huts1234.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">markdown</h2>
+            <div class="post-date">2025-11-28</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="markdown-完全指南从入门到精通">Markdown 完全指南：从入门到精通</h1>
+<hr>
+<h2 id="一-markdown-核心语法">一、Markdown 核心语法</h2>
+<h3 id="1-基础元素">1. 基础元素</h3>
+<table>
+<thead>
+<tr>
+<th><strong>语法</strong></th>
+<th><strong>效果</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code># 标题</code></td>
+<td>一级标题</td>
+<td><code># 一级标题</code> → <h1>一级标题</h1></td>
+</tr>
+<tr>
+<td><code>## 标题</code></td>
+<td>二级标题</td>
+<td><code>## 二级标题</code> → <h2>二级标题</h2></td>
+</tr>
+<tr>
+<td><code>**加粗**</code></td>
+<td>加粗文本</td>
+<td><code>**加粗**</code> → <strong>加粗</strong></td>
+</tr>
+<tr>
+<td><code>*斜体*</code></td>
+<td>斜体文本</td>
+<td><code>*斜体*</code> → <em>斜体</em></td>
+</tr>
+<tr>
+<td><code>~~删除线~~</code></td>
+<td>删除线</td>
+<td><code>~~删除线~~</code> → <s>删除线</s></td>
+</tr>
+<tr>
+<td><code>[链接](https://...)</code></td>
+<td>超链接</td>
+<td><code>[Google](https://google.com)</code> → <a href="https://google.com">Google</a></td>
+</tr>
+<tr>
+<td><code>![图片](image.jpg)</code></td>
+<td>插入图片</td>
+<td><code>![Logo](logo.png)</code> → 显示图片</td>
+</tr>
+<tr>
+<td><code>&gt; 引用</code></td>
+<td>引用块</td>
+<td><code>&gt; 名人名言</code> → <blockquote>名人名言</blockquote></td>
+</tr>
+<tr>
+<td><code>`代码`</code></td>
+<td>行内代码</td>
+<td><code>`print(&quot;Hello&quot;)`</code> → <code>print(&quot;Hello&quot;)</code></td>
+</tr>
+<tr>
+<td><code>代码块</code></td>
+<td>多行代码（指定语言）</td>
+<td><pre><code>print(&quot;Hello&quot;)</code></pre></td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-列表与表格">2. 列表与表格</h3>
+<h4 id="无序列表">无序列表</h4>
+<pre><code class="language-markdown">- 项目1
+  - 子项目1
+  - 子项目2
+- 项目2
+</code></pre>
+<h4 id="有序列表">有序列表</h4>
+<pre><code class="language-markdown">1. 第一项
+2. 第二项
+3. 第三项
+</code></pre>
+<h4 id="表格">表格</h4>
+<pre><code class="language-markdown">| 列1   | 列2   | 列3   |
+|-------|-------|-------|
+| 内容1 | 内容2 | 内容3 |
+| 内容4 | 内容5 | 内容6 |
+</code></pre>
+<p>效果：</p>
+<table>
+<thead>
+<tr>
+<th>列1</th>
+<th>列2</th>
+<th>列3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内容1</td>
+<td>内容2</td>
+<td>内容3</td>
+</tr>
+<tr>
+<td>内容4</td>
+<td>内容5</td>
+<td>内容6</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="二-扩展语法gfm-commonmark">二、扩展语法（GFM / CommonMark）</h2>
+<h3 id="1-github-flavored-markdown-gfm">1. GitHub Flavored Markdown (GFM)</h3>
+<table>
+<thead>
+<tr>
+<th><strong>功能</strong></th>
+<th><strong>语法</strong></th>
+<th><strong>示例</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>任务列表</td>
+<td><code>- [x] 完成</code></td>
+<td>✅ 完成</td>
+</tr>
+<tr>
+<td>表格对齐</td>
+<td><code>:---:</code> 居中，<code>---:</code> 右对齐</td>
+<td>见上方表格示例</td>
+</tr>
+<tr>
+<td>代码块高亮</td>
+<td><code>python 代码块</code></td>
+<td>语法高亮显示</td>
+</tr>
+<tr>
+<td>自动链接</td>
+<td><code>&lt;https://example.com&gt;</code></td>
+<td><a href="https://example.com">https://example.com</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-其他扩展功能">2. 其他扩展功能</h3>
+<ul>
+<li><strong>脚注</strong>：<pre><code class="language-markdown">这是一句话[^1]需要注释。
+[^1]: 这里是脚注内容。
+</code></pre>
+</li>
+<li><strong>定义列表</strong>：<pre><code class="language-markdown">术语1
+: 定义1
+术语2
+: 定义2
+</code></pre>
+</li>
+<li><strong>数学公式（KaTeX）</strong>：<pre><code class="language-markdown">行内公式：$E=mc^2$  
+块级公式：
+$$
+\sum_{i=1}^n i = \frac{n(n+1)}{2}
+$$
+</code></pre>
+</li>
+</ul>
+<hr>
+<h2 id="三-实用技巧与工具">三、实用技巧与工具</h2>
+<h3 id="1-效率工具推荐">1. 效率工具推荐</h3>
+<table>
+<thead>
+<tr>
+<th><strong>工具</strong></th>
+<th><strong>功能</strong></th>
+<th><strong>平台</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>VS Code</td>
+<td>实时预览 + 插件扩展</td>
+<td>Windows/macOS/Linux</td>
+</tr>
+<tr>
+<td>Typora</td>
+<td>所见即所得编辑器</td>
+<td>Windows/macOS/Linux</td>
+</tr>
+<tr>
+<td>Obsidian</td>
+<td>知识库管理 + 双向链接</td>
+<td>全平台</td>
+</tr>
+<tr>
+<td>Markdown All in One</td>
+<td>快捷键增强（VS Code插件）</td>
+<td>VS Code 插件</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-格式转换工具">2. 格式转换工具</h3>
+<ul>
+<li><strong>Pandoc</strong>：支持 Markdown 转 PDF/Word/HTML 等格式<pre><code class="language-bash">pandoc input.md -o output.pdf
+</code></pre>
+</li>
+<li><strong>Markdown to Slides</strong>：生成幻灯片<pre><code class="language-bash">npm install -g reveal-md
+reveal-md slides.md --theme=night
+</code></pre>
+</li>
+</ul>
+<hr>
+<h2 id="四-markdown-应用场景">四、Markdown 应用场景</h2>
+<h3 id="1-开发文档">1. 开发文档</h3>
+<pre><code class="language-markdown"># API 参考
+
+## 用户接口
+### `GET /users/{id}`
+- **参数**:
+  - `id` (必填): 用户ID
+- **响应**:
+  ```json
+  { &quot;name&quot;: &quot;John&quot;, &quot;email&quot;: &quot;john@example.com&quot; }
+</code></pre>
+<pre><code>
+### 2. 技术博客
+```markdown
+---
+title: &quot;如何学习 Markdown&quot;
+date: 2023-10-05
+tags: [&quot;教程&quot;, &quot;写作&quot;]
+---
+
+## 入门步骤
+1. 安装编辑器（推荐 [VS Code](https://code.visualstudio.com/)）
+2. 创建 `.md` 文件并开始写作
+3. 使用 Git 管理版本
+</code></pre>
+<hr>
+<h2 id="五-常见问题与解答">五、常见问题与解答</h2>
+<h3 id="1-如何转义特殊字符">1. 如何转义特殊字符？</h3>
+<p>使用反斜杠 <code>\</code> 转义：</p>
+<pre><code class="language-markdown">\*这不是斜体\* → *这不是斜体*
+</code></pre>
+<h3 id="2-如何实现多级标题自动编号">2. 如何实现多级标题自动编号？</h3>
+<p>需借助插件（如 Typora 的「插入目录」功能）或生成工具：</p>
+<pre><code class="language-markdown">&lt;!-- 生成目录（部分工具支持） --&gt;
+[TOC]
+</code></pre>
+<h3 id="3-markdown-文件如何导出为-pdf">3. Markdown 文件如何导出为 PDF？</h3>
+<ul>
+<li><strong>VS Code</strong>：安装 <code>Markdown PDF</code> 插件</li>
+<li><strong>Typora</strong>：直接菜单导出（文件 → 导出 → PDF）</li>
+</ul>
+<hr>
+<p>掌握 Markdown 可大幅提升文档编写效率，建议结合版本控制工具（如 Git）管理技术文档。 🚀📄</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://huts1234.github.io/mac/">
+                  <h3 class="post-title">
+                    MAC
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

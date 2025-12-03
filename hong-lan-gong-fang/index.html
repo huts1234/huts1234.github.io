@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>红蓝攻防 | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://huts1234.github.io/favicon.ico?v=1764722134508">
+<link rel="stylesheet" href="https://huts1234.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="光猫桥接详细指南
+
+一、光猫桥接的核心价值
+光猫桥接模式是将光猫从&quot;路由模式&quot;切换为&quot;透明传输模式&quot;，使其仅承担光电信号转换功能，而将拨号、路由、NAT等任务移交专业路由器完成。其核心优势包括：
+
+
+..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://huts1234.github.io">
+        <img src="https://huts1234.github.io/images/avatar.png?v=1764722134508" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://huts1234.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">红蓝攻防</h2>
+            <div class="post-date">2025-11-28</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="光猫桥接详细指南">光猫桥接详细指南</h1>
+<hr>
+<h2 id="一-光猫桥接的核心价值">一、光猫桥接的核心价值</h2>
+<p><strong>光猫桥接模式</strong>是将光猫从&quot;路由模式&quot;切换为&quot;透明传输模式&quot;，使其仅承担<strong>光电信号转换</strong>功能，而将拨号、路由、NAT等任务移交专业路由器完成。其核心优势包括：</p>
+<table>
+<thead>
+<tr>
+<th><strong>对比维度</strong></th>
+<th><strong>桥接模式</strong></th>
+<th><strong>路由模式</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>网络性能</td>
+<td>降低延迟（减少NAT层级），提升带宽利用率</td>
+<td>多一层NAT转换，性能损耗约10-15%</td>
+</tr>
+<tr>
+<td>设备控制权</td>
+<td>可自定义路由器功能（DDNS/VPN/QoS）</td>
+<td>受限于光猫固件功能</td>
+</tr>
+<tr>
+<td>稳定性</td>
+<td>避免光猫性能瓶颈（如连接数限制）</td>
+<td>高负载易导致光猫死机</td>
+</tr>
+<tr>
+<td>适用场景</td>
+<td>游戏/直播/NAS用户</td>
+<td>普通上网需求</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="二-桥接前准备事项">二、桥接前准备事项</h2>
+<h3 id="1-必备信息获取">1. 必备信息获取</h3>
+<ul>
+<li><strong>宽带账号密码</strong>：联系运营商客服（电信10000/联通10010/移动10086）或查看装机合同</li>
+<li><strong>光猫超管账号</strong>：
+<table>
+<thead>
+<tr>
+<th><strong>运营商</strong></th>
+<th><strong>用户名</strong></th>
+<th><strong>密码</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>中国电信</td>
+<td>telecomadmin</td>
+<td>nE7jA%5m</td>
+</tr>
+<tr>
+<td>中国联通</td>
+<td>CUAdmin</td>
+<td>CUAdmin</td>
+</tr>
+<tr>
+<td>中国移动</td>
+<td>CMCCAdmin</td>
+<td>aDm8H%MdA</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="2-工具准备">2. 工具准备</h3>
+<ul>
+<li>网线（连接光猫LAN1口与路由器WAN口）</li>
+<li>电脑（用于配置光猫和路由器）</li>
+<li>记录原始配置（拍照备份光猫设置页面）</li>
+</ul>
+<hr>
+<h2 id="三-桥接设置分步教程">三、桥接设置分步教程</h2>
+<h3 id="1-登录光猫管理界面">1. 登录光猫管理界面</h3>
+<ol>
+<li>连接光猫LAN口与电脑，设置电脑IP为<strong>自动获取</strong></li>
+<li>浏览器访问光猫管理地址（常见于设备底部标签）：
+<ul>
+<li>电信：<code>http://192.168.1.1</code></li>
+<li>联通：<code>http://192.168.1.1/cu.html</code></li>
+<li>移动：<code>http://192.168.1.1</code></li>
+</ul>
+</li>
+<li>使用<strong>超管账号</strong>登录（非普通user账号）</li>
+</ol>
+<h3 id="2-删除原有拨号连接">2. 删除原有拨号连接</h3>
+<ol>
+<li>进入<strong>网络 → 宽带设置</strong></li>
+<li>找到<code>INTERNET</code>或<code>4_INTERNET</code>连接，记录<strong>VLAN ID</strong>（如41）</li>
+<li>删除该连接（点击&quot;删除&quot;或&quot;移除&quot;）</li>
+</ol>
+<h3 id="3-新建桥接连接">3. 新建桥接连接</h3>
+<table>
+<thead>
+<tr>
+<th><strong>参数</strong></th>
+<th><strong>设置值</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>连接模式</td>
+<td>桥接</td>
+<td>必选</td>
+</tr>
+<tr>
+<td>业务类型</td>
+<td>Internet</td>
+<td>部分光猫需选择</td>
+</tr>
+<tr>
+<td>VLAN模式</td>
+<td>启用</td>
+<td>必须与之前记录的VLAN ID一致</td>
+</tr>
+<tr>
+<td>VLAN ID</td>
+<td>填入之前记录的值（如41）</td>
+<td>不同地区不同，不可随意修改</td>
+</tr>
+<tr>
+<td>绑定端口</td>
+<td>LAN1（或根据需要选择）</td>
+<td>建议仅绑定路由器连接的端口</td>
+</tr>
+</tbody>
+</table>
+<p><strong>操作路径</strong>（以电信天翼网关为例）：<br>
+网络 → 网络设置 → 新建WAN连接 → 按上表填写 → 保存</p>
+<h3 id="4-关闭光猫路由功能">4. 关闭光猫路由功能</h3>
+<ul>
+<li><strong>DHCP服务</strong>：网络 → DHCP设置 → 关闭</li>
+<li><strong>WiFi功能</strong>：无线网络 → 关闭SSID（避免信号干扰）</li>
+</ul>
+<h3 id="5-配置路由器拨号">5. 配置路由器拨号</h3>
+<ol>
+<li>将路由器WAN口连接至光猫LAN1</li>
+<li>登录路由器管理界面（如<code>192.168.50.1</code>）</li>
+<li>选择<strong>PPPoE拨号</strong>，输入宽带账号密码</li>
+<li>开启IPv6（如需）：选择<strong>Native</strong>或<strong>Passthrough</strong>模式</li>
+</ol>
+<hr>
+<h2 id="四-桥接后优化设置">四、桥接后优化设置</h2>
+<h3 id="1-路由器推荐配置">1. 路由器推荐配置</h3>
+<table>
+<thead>
+<tr>
+<th><strong>功能</strong></th>
+<th><strong>建议值</strong></th>
+<th><strong>作用</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MTU</td>
+<td>1492（PPPoE默认）</td>
+<td>避免数据包分片降低效率</td>
+</tr>
+<tr>
+<td>NAT类型</td>
+<td>Full Cone</td>
+<td>提升P2P连接成功率（游戏/NAS）</td>
+</tr>
+<tr>
+<td>QoS</td>
+<td>按设备分配带宽</td>
+<td>保障关键应用（视频/游戏）</td>
+</tr>
+<tr>
+<td>防火墙</td>
+<td>开启SPI和DoS防护</td>
+<td>平衡安全与性能</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-测速与验证">2. 测速与验证</h3>
+<ul>
+<li><strong>测速平台</strong>：Speedtest（选择同运营商节点）</li>
+<li><strong>延迟测试</strong>：<pre><code class="language-bash">ping 223.5.5.5 -n 20  # 阿里云DNS
+tracert www.baidu.com  # 查看路由跳数
+</code></pre>
+</li>
+</ul>
+<hr>
+<h2 id="五-常见问题解决">五、常见问题解决</h2>
+<h3 id="1-桥接后无法上网">1. 桥接后无法上网</h3>
+<ul>
+<li><strong>检查VLAN ID</strong>：必须与运营商一致（错误则数据无法识别）</li>
+<li><strong>确认账号密码</strong>：大小写敏感，建议复制粘贴</li>
+<li><strong>重启顺序</strong>：光猫→路由器→终端设备</li>
+</ul>
+<h3 id="2-iptv无法使用">2. IPTV无法使用</h3>
+<ul>
+<li><strong>单独绑定端口</strong>：在光猫中为IPTV业务新建一条<strong>路由模式</strong>连接，绑定到LAN2口</li>
+<li><strong>组播设置</strong>：开启路由器<strong>IGMP Proxy</strong>（OpenWRT路径：网络→接口→LAN→物理设置→勾选&quot;IGMP嗅探&quot;）</li>
+</ul>
+<h3 id="3-运营商远程恢复">3. 运营商远程恢复</h3>
+<ul>
+<li><strong>禁用TR069</strong>：在光猫&quot;远程管理&quot;页面禁用TR069连接（防止自动恢复路由模式）</li>
+<li><strong>物理隔离</strong>：拔掉光猫电话线（部分光猫通过电话线接收配置更新）</li>
+</ul>
+<hr>
+<p>通过桥接释放光猫性能，配合高性能路由器，可显著提升网络体验。建议每月重启一次光猫和路由器，保持长期稳定运行。 🚀🔧</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://huts1234.github.io/guang-mao-qiao-jie/">
+                  <h3 class="post-title">
+                    光猫桥接
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

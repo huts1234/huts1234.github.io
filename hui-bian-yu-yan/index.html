@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>汇编语言 | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://huts1234.github.io/favicon.ico?v=1764722134508">
+<link rel="stylesheet" href="https://huts1234.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="汇编语言深度解析：从基础到实战
+
+一、汇编语言核心概念
+1. 汇编语言定位与特点
+
+低级语言：直接对应机器指令，1:1映射CPU操作
+硬件相关：不同架构（x86、ARM、MIPS）语法差异显著
+执行效率：无编译优化层，性能取决于程序员水平
+..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://huts1234.github.io">
+        <img src="https://huts1234.github.io/images/avatar.png?v=1764722134508" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://huts1234.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">汇编语言</h2>
+            <div class="post-date">2025-11-28</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="汇编语言深度解析从基础到实战">汇编语言深度解析：从基础到实战</h1>
+<hr>
+<h2 id="一-汇编语言核心概念">一、汇编语言核心概念</h2>
+<h3 id="1-汇编语言定位与特点">1. 汇编语言定位与特点</h3>
+<ul>
+<li><strong>低级语言</strong>：直接对应机器指令，1:1映射CPU操作</li>
+<li><strong>硬件相关</strong>：不同架构（x86、ARM、MIPS）语法差异显著</li>
+<li><strong>执行效率</strong>：无编译优化层，性能取决于程序员水平</li>
+<li><strong>应用场景</strong>：操作系统内核、固件开发、逆向工程、性能优化</li>
+</ul>
+<h3 id="2-汇编语言-vs-高级语言">2. 汇编语言 vs 高级语言</h3>
+<table>
+<thead>
+<tr>
+<th><strong>维度</strong></th>
+<th>汇编语言</th>
+<th>C语言</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>可读性</td>
+<td>低（依赖注释）</td>
+<td>高（结构化语法）</td>
+</tr>
+<tr>
+<td>移植性</td>
+<td>无（架构绑定）</td>
+<td>高（标准库跨平台）</td>
+</tr>
+<tr>
+<td>开发效率</td>
+<td>低（手动管理内存/寄存器）</td>
+<td>高（自动内存管理）</td>
+</tr>
+<tr>
+<td>控制粒度</td>
+<td>精确到时钟周期</td>
+<td>依赖编译器优化</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="二-汇编语言基础架构">二、汇编语言基础架构</h2>
+<h3 id="1-x86架构核心组件">1. x86架构核心组件</h3>
+<h4 id="寄存器组">寄存器组</h4>
+<table>
+<thead>
+<tr>
+<th><strong>类型</strong></th>
+<th>32位寄存器</th>
+<th>64位扩展</th>
+<th>主要用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>通用寄存器</td>
+<td>EAX, EBX</td>
+<td>RAX, RBX</td>
+<td>数据运算、函数参数传递</td>
+</tr>
+<tr>
+<td>指针寄存器</td>
+<td>EIP, ESP</td>
+<td>RIP, RSP</td>
+<td>指令指针、堆栈指针</td>
+</tr>
+<tr>
+<td>段寄存器</td>
+<td>CS, DS</td>
+<td>保留</td>
+<td>内存分段（现代系统基本弃用）</td>
+</tr>
+<tr>
+<td>标志寄存器</td>
+<td>EFLAGS</td>
+<td>RFLAGS</td>
+<td>存储进位、零标志等状态</td>
+</tr>
+</tbody>
+</table>
+<h4 id="内存寻址模式">内存寻址模式</h4>
+<ul>
+<li><strong>直接寻址</strong>：<code>mov eax, [0x404000]</code></li>
+<li><strong>寄存器间接</strong>：<code>mov ebx, [eax]</code></li>
+<li><strong>基址变址</strong>：<code>mov ecx, [ebx+esi*4+8]</code></li>
+</ul>
+<h3 id="2-arm架构核心差异">2. ARM架构核心差异</h3>
+<table>
+<thead>
+<tr>
+<th><strong>特性</strong></th>
+<th>x86-64</th>
+<th>ARMv8-A</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>指令集类型</td>
+<td>CISC（复杂指令集）</td>
+<td>RISC（精简指令集）</td>
+</tr>
+<tr>
+<td>通用寄存器数量</td>
+<td>16</td>
+<td>31</td>
+</tr>
+<tr>
+<td>条件执行</td>
+<td>有限（如CMOVcc）</td>
+<td>所有指令可条件执行</td>
+</tr>
+<tr>
+<td>调用约定</td>
+<td>参数通过堆栈传递</td>
+<td>前8个参数用寄存器传递</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="三-汇编语言语法精要">三、汇编语言语法精要</h2>
+<h3 id="1-x86语法示例nasm">1. x86语法示例（NASM）</h3>
+<pre><code class="language-asm">section .data
+    msg db 'Hello, World!', 0xA  ; 定义字符串
+    len equ $ - msg              ; 计算字符串长度
+
+section .text
+global _start
+
+_start:
+    ; 写系统调用 (sys_write)
+    mov eax, 4          ; syscall号: 4 (write)
+    mov ebx, 1          ; 文件描述符: stdout
+    mov ecx, msg        ; 字符串地址
+    mov edx, len        ; 字符串长度
+    int 0x80            ; 触发中断
+
+    ; 退出系统调用 (sys_exit)
+    mov eax, 1          ; syscall号: 1 (exit)
+    xor ebx, ebx        ; 返回码: 0
+    int 0x80
+</code></pre>
+<h3 id="2-arm64语法示例gas">2. ARM64语法示例（GAS）</h3>
+<pre><code class="language-asm">.data
+msg: .asciz &quot;Hello, World!\n&quot;
+len = . - msg
+
+.text
+.global _start
+
+_start:
+    /* write系统调用 */
+    mov x0, #1          // 文件描述符: stdout
+    ldr x1, =msg        // 字符串地址
+    ldr x2, =len        // 字符串长度
+    mov x8, #64         // syscall号: 64 (write)
+    svc #0             // 执行系统调用
+
+    /* exit系统调用 */
+    mov x0, #0          // 返回码: 0
+    mov x8, #93         // syscall号: 93 (exit)
+    svc #0
+</code></pre>
+<hr>
+<h2 id="四-汇编开发工具链">四、汇编开发工具链</h2>
+<h3 id="1-常用工具">1. 常用工具</h3>
+<table>
+<thead>
+<tr>
+<th><strong>工具</strong></th>
+<th>用途</th>
+<th>示例命令</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NASM</td>
+<td>x86汇编器</td>
+<td><code>nasm -f elf64 prog.asm</code></td>
+</tr>
+<tr>
+<td>GAS (as)</td>
+<td>GNU汇编器（支持多架构）</td>
+<td><code>as -o prog.o prog.s</code></td>
+</tr>
+<tr>
+<td>objdump</td>
+<td>反汇编工具</td>
+<td><code>objdump -d prog.o</code></td>
+</tr>
+<tr>
+<td>GDB</td>
+<td>调试器</td>
+<td><code>gdb -q ./prog</code></td>
+</tr>
+<tr>
+<td>strace</td>
+<td>跟踪系统调用</td>
+<td><code>strace ./prog</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-与c语言交互">2. 与C语言交互</h3>
+<h4 id="内联汇编gcc">内联汇编（GCC）</h4>
+<pre><code class="language-c">int add(int a, int b) {
+    int result;
+    __asm__ (
+        &quot;add %[res], %[a], %[b]&quot;
+        : [res] &quot;=r&quot; (result)
+        : [a] &quot;r&quot; (a), [b] &quot;r&quot; (b)
+    );
+    return result;
+}
+</code></pre>
+<h4 id="独立汇编模块调用">独立汇编模块调用</h4>
+<pre><code class="language-asm">; sum.asm (x64)
+global sum
+
+section .text
+sum:
+    mov eax, edi
+    add eax, esi
+    ret
+</code></pre>
+<pre><code class="language-c">// main.c
+extern int sum(int a, int b);
+
+int main() {
+    return sum(2, 3);
+}
+</code></pre>
+<p>编译命令：</p>
+<pre><code class="language-bash">nasm -f elf64 sum.asm &amp;&amp; gcc main.c sum.o -o main
+</code></pre>
+<hr>
+<h2 id="五-高级主题与优化技巧">五、高级主题与优化技巧</h2>
+<h3 id="1-simd指令优化">1. SIMD指令优化</h3>
+<pre><code class="language-asm">; x86 AVX2 向量加法
+section .data
+    a dd 1.0, 2.0, 3.0, 4.0
+    b dd 5.0, 6.0, 7.0, 8.0
+    result dd 0.0, 0.0, 0.0, 0.0
+
+section .text
+global _start
+
+_start:
+    vmovaps ymm0, [a]      ; 加载向量a
+    vaddps ymm1, ymm0, [b] ; 向量加法
+    vmovaps [result], ymm1  ; 存储结果
+</code></pre>
+<h3 id="2-性能调优原则">2. 性能调优原则</h3>
+<ul>
+<li><strong>减少内存访问</strong>：优先使用寄存器，利用缓存局部性</li>
+<li><strong>指令级并行</strong>：合理安排指令顺序避免流水线阻塞</li>
+<li><strong>循环展开</strong>：手动展开减少分支判断开销</li>
+<li><strong>避免False Dependency</strong>：使用不同寄存器消除写后读冲突</li>
+</ul>
+<hr>
+<h2 id="六-逆向工程中的汇编应用">六、逆向工程中的汇编应用</h2>
+<h3 id="1-反编译分析">1. 反编译分析</h3>
+<pre><code class="language-asm">; 原始C代码: int calc(int x) { return x * 2 + 5; }
+0000000000001125 &lt;calc&gt;:
+    1125:   8d 04 7f                lea    eax,[rdi+rdi*2]  ; x*3
+    1128:   83 c0 05                add    eax,0x5         ; +5
+    112b:   c3                      ret
+</code></pre>
+<p>逆向推导公式：<br>
+<code>result = x * 3 + 5</code> （原始代码存在编译优化差异）</p>
+<h3 id="2-常见混淆对抗">2. 常见混淆对抗</h3>
+<ul>
+<li><strong>指令替换</strong>：<code>mov eax, 0</code> → <code>xor eax, eax</code></li>
+<li><strong>控制流平坦化</strong>：通过跳转表打乱执行顺序</li>
+<li><strong>代码自修改</strong>：运行时解密关键指令</li>
+</ul>
+<hr>
+<p>掌握汇编语言是理解计算机体系结构的基石。建议从调试简单程序开始，逐步过渡到性能优化和逆向分析，同时关注不同架构的特性差异。 🖥️🔧</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://huts1234.github.io/x86/">
+                  <h3 class="post-title">
+                    X86
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

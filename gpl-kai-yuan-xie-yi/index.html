@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>GPL开源协议 | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://huts1234.github.io/favicon.ico?v=1764722134508">
+<link rel="stylesheet" href="https://huts1234.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="GNU通用公共许可证（GPL）深度指南
+一、GPL核心定义
+GPL（GNU General Public License）是由自由软件基金会（FSF）设计的强Copyleft许可证，旨在确保用户对软件的自由使用、修改和分发权。其核心原则是“..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://huts1234.github.io">
+        <img src="https://huts1234.github.io/images/avatar.png?v=1764722134508" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://huts1234.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">GPL开源协议</h2>
+            <div class="post-date">2025-11-28</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="gnu通用公共许可证gpl深度指南">GNU通用公共许可证（GPL）深度指南</h1>
+<h2 id="一-gpl核心定义">一、GPL核心定义</h2>
+<p>GPL（<strong>GNU General Public License</strong>）是由自由软件基金会（FSF）设计的<strong>强Copyleft许可证</strong>，旨在确保用户对软件的自由使用、修改和分发权。其核心原则是“<strong>自由不可剥夺</strong>”——任何基于GPL代码的衍生作品必须同样以GPL发布。</p>
+<hr>
+<h2 id="二-gpl核心条款解析">二、GPL核心条款解析</h2>
+<h3 id="1-用户四大自由">1. 用户四大自由</h3>
+<ol>
+<li><strong>自由运行软件</strong>（无论任何目的）</li>
+<li><strong>自由研究源代码</strong>（前提是代码可获取）</li>
+<li><strong>自由分发副本</strong></li>
+<li><strong>自由修改并发布衍生版本</strong></li>
+</ol>
+<h3 id="2-copyleft著佐权规则">2. Copyleft（著佐权）规则</h3>
+<ul>
+<li><strong>传染性</strong>：任何包含GPL代码的衍生作品（包括动态链接）<strong>必须整体采用GPL</strong>。</li>
+<li><strong>源代码公开义务</strong>：分发二进制时必须提供完整源代码（或获取途径）。</li>
+<li><strong>禁止附加限制</strong>：不得添加额外条款限制用户权利（如专利诉讼限制）。</li>
+</ul>
+<h3 id="3-兼容性约束">3. 兼容性约束</h3>
+<ul>
+<li><strong>GPLv2</strong>：与Apache 2.0、LGPL不兼容（条款冲突）。</li>
+<li><strong>GPLv3</strong>：明确兼容Apache 2.0，但需处理专利条款差异。</li>
+</ul>
+<hr>
+<h2 id="三-gpl版本演变对比">三、GPL版本演变对比</h2>
+<table>
+<thead>
+<tr>
+<th><strong>版本</strong></th>
+<th><strong>发布时间</strong></th>
+<th><strong>关键改进</strong></th>
+<th><strong>典型项目</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GPLv1</td>
+<td>1989年</td>
+<td>初版定义Copyleft机制</td>
+<td>GCC早期版本</td>
+</tr>
+<tr>
+<td>GPLv2</td>
+<td>1991年</td>
+<td>明确“自由或死亡”原则，限制Tivoization</td>
+<td>Linux内核、Git</td>
+</tr>
+<tr>
+<td>GPLv3</td>
+<td>2007年</td>
+<td>增加反专利诉讼条款、反DRM限制</td>
+<td>Bash、GDB</td>
+</tr>
+<tr>
+<td>AGPLv3</td>
+<td>2008年</td>
+<td>覆盖网络服务（SaaS场景）的源代码分发要求</td>
+<td>MongoDB（曾使用）、Nextcloud</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="四-合规使用场景与要求">四、合规使用场景与要求</h2>
+<h3 id="1-合规使用条件">1. 合规使用条件</h3>
+<table>
+<thead>
+<tr>
+<th><strong>场景</strong></th>
+<th><strong>要求</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>直接使用GPL软件</strong></td>
+<td>无限制，无需开源自身代码</td>
+</tr>
+<tr>
+<td><strong>修改GPL代码并分发</strong></td>
+<td>必须公开修改后的完整源代码，且使用GPL发布</td>
+</tr>
+<tr>
+<td><strong>动态链接GPL库</strong></td>
+<td>整个程序必须采用GPL（除非使用LGPL库）</td>
+</tr>
+<tr>
+<td><strong>静态链接GPL库</strong></td>
+<td>同上</td>
+</tr>
+<tr>
+<td><strong>SaaS服务使用GPL代码</strong></td>
+<td>若使用AGPL则需开源服务端代码；GPLv3无明确要求</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-禁止行为">2. 禁止行为</h3>
+<ul>
+<li>❌ 闭源分发基于GPL的衍生作品</li>
+<li>❌ 在GPL代码中添加数字版权管理（DRM）限制</li>
+<li>❌ 起诉用户专利侵权（GPLv3明确终止此类授权）</li>
+</ul>
+<hr>
+<h2 id="五-典型案例与法律争议">五、典型案例与法律争议</h2>
+<h3 id="1-成功合规案例">1. 成功合规案例</h3>
+<ul>
+<li><strong>Linux内核</strong>：严格遵循GPLv2，迫使厂商开源驱动代码（如NVIDIA GPU内核模块）。</li>
+<li><strong>WordPress</strong>：基于GPL发布，衍生主题/插件需继承GPL（引发商业主题市场争议）。</li>
+</ul>
+<h3 id="2-重大违规事件">2. 重大违规事件</h3>
+<ul>
+<li><strong>思科vs FSF</strong>（2008）：思科因未开源基于GPL的路由器固件，被判赔偿并公开代码。</li>
+<li><strong>VMware诉讼</strong>（2015）：被指控在ESXi中违反GPLv2，最终和解并开源部分组件。</li>
+</ul>
+<hr>
+<h2 id="六-gpl与其他许可证对比">六、GPL与其他许可证对比</h2>
+<table>
+<thead>
+<tr>
+<th><strong>维度</strong></th>
+<th><strong>GPL</strong></th>
+<th><strong>MIT</strong></th>
+<th><strong>Apache 2.0</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>传染性</strong></td>
+<td>强（衍生作品必须GPL）</td>
+<td>无</td>
+<td>无</td>
+</tr>
+<tr>
+<td><strong>专利条款</strong></td>
+<td>GPLv3明确禁止专利诉讼</td>
+<td>无</td>
+<td>明确授予专利使用权</td>
+</tr>
+<tr>
+<td><strong>SaaS约束</strong></td>
+<td>AGPLv3要求开源服务端代码</td>
+<td>无</td>
+<td>无</td>
+</tr>
+<tr>
+<td><strong>商业友好度</strong></td>
+<td>低（限制闭源商业化）</td>
+<td>高</td>
+<td>高</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="七-企业合规建议">七、企业合规建议</h2>
+<h3 id="1-代码隔离策略">1. 代码隔离策略</h3>
+<ul>
+<li><strong>明确代码边界</strong>：将GPL代码与自有代码物理隔离（不同仓库/进程通信）。</li>
+<li><strong>使用宽松许可证库</strong>：优先选用LGPL/MIT库替代GPL依赖项。</li>
+</ul>
+<h3 id="2-开发流程管控">2. 开发流程管控</h3>
+<ul>
+<li><strong>许可证扫描工具</strong>：集成FOSSology、Black Duck检测GPL污染。</li>
+<li><strong>法律审查流程</strong>：所有第三方代码引入需经合规团队审批。</li>
+</ul>
+<h3 id="3-风险预案">3. 风险预案</h3>
+<ul>
+<li><strong>贡献者协议（CLA）</strong>：要求外部贡献者签署专利授权协议。</li>
+<li><strong>应急开源准备</strong>：预先规划可开源的模块以应对GPL合规需求。</li>
+</ul>
+<hr>
+<h2 id="八-常见问题faq">八、常见问题（FAQ）</h2>
+<h3 id="q1能否在商业产品中嵌入gpl代码">Q1：能否在商业产品中嵌入GPL代码？</h3>
+<p><strong>A</strong>：可以，但必须开源整个产品的代码（若动态/静态链接），或通过进程隔离（如独立GPL程序）避免传染。</p>
+<h3 id="q2gplv2与gplv3代码能否混合">Q2：GPLv2与GPLv3代码能否混合？</h3>
+<p><strong>A</strong>：不能直接混合，需将所有代码升级到GPLv3或降级到GPLv2（需版权持有者同意）。</p>
+<h3 id="q3企业内部修改gpl代码是否需要开源">Q3：企业内部修改GPL代码是否需要开源？</h3>
+<p><strong>A</strong>：仅内部使用无需开源，一旦分发给外部用户则触发开源义务。</p>
+<hr>
+<p>如需具体项目的GPL合规方案或法律咨询，建议联系专业知识产权律师。 🔍</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://huts1234.github.io/gnu/">
+                  <h3 class="post-title">
+                    GNU
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

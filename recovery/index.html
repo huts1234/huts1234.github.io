@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Recovery | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://huts1234.github.io/favicon.ico?v=1764722134508">
+<link rel="stylesheet" href="https://huts1234.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="Android Recovery 模式完全指南：解锁高级系统操作
+
+一、Recovery 模式核心功能
+Recovery 模式是 Android 设备的独立操作系统分区，专用于系统维护与修复，主要功能包括：
+
+
+
+功能分类
+典型操作
+风险等..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://huts1234.github.io">
+        <img src="https://huts1234.github.io/images/avatar.png?v=1764722134508" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://huts1234.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Recovery</h2>
+            <div class="post-date">2025-11-28</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="android-recovery-模式完全指南解锁高级系统操作">Android Recovery 模式完全指南：解锁高级系统操作</h1>
+<hr>
+<h2 id="一-recovery-模式核心功能">一、Recovery 模式核心功能</h2>
+<p><strong>Recovery 模式</strong>是 Android 设备的独立操作系统分区，专用于<strong>系统维护与修复</strong>，主要功能包括：</p>
+<table>
+<thead>
+<tr>
+<th><strong>功能分类</strong></th>
+<th><strong>典型操作</strong></th>
+<th><strong>风险等级</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>系统更新</td>
+<td>刷入官方 OTA 包（/cache/recovery/block.map）</td>
+<td>低</td>
+</tr>
+<tr>
+<td>数据擦除</td>
+<td>恢复出厂设置（清除 /data 和 /cache 分区）</td>
+<td>高（数据丢失）</td>
+</tr>
+<tr>
+<td>分区管理</td>
+<td>挂载/格式化 system、vendor 等分区</td>
+<td>高</td>
+</tr>
+<tr>
+<td>刷机操作</td>
+<td>安装自定义 ROM、Magisk 模块</td>
+<td>中</td>
+</tr>
+<tr>
+<td>备份恢复</td>
+<td>创建/恢复 Nandroid 备份（完整系统快照）</td>
+<td>低</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="二-进入-recovery-模式的通用方法">二、进入 Recovery 模式的通用方法</h2>
+<h3 id="1-按键组合不同厂商差异">1. 按键组合（不同厂商差异）</h3>
+<table>
+<thead>
+<tr>
+<th><strong>品牌</strong></th>
+<th><strong>按键组合</strong></th>
+<th><strong>操作时机（关机后）</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>谷歌 Pixel</td>
+<td>电源键 + 音量减 → 选 Recovery</td>
+<td>出现 Google Logo 时松开电源键</td>
+</tr>
+<tr>
+<td>三星 Galaxy</td>
+<td>电源键 + 音量加 + Bixby 键</td>
+<td>出现 LOGO 振动后松开电源键</td>
+</tr>
+<tr>
+<td>小米 Redmi</td>
+<td>电源键 + 音量加</td>
+<td>保持至 MI Logo 出现</td>
+</tr>
+<tr>
+<td>华为/Honor</td>
+<td>电源键 + 音量加（部分机型需 USB 连接）</td>
+<td>振动后持续按压</td>
+</tr>
+<tr>
+<td>一加 OnePlus</td>
+<td>电源键 + 音量减</td>
+<td>出现 LOGO 后松开</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-adb-命令进入">2. ADB 命令进入</h3>
+<pre><code class="language-bash">adb reboot recovery  # 需要已开启USB调试
+</code></pre>
+<hr>
+<h2 id="三-官方-recovery-vs-自定义-recovery">三、官方 Recovery vs 自定义 Recovery</h2>
+<h3 id="1-功能对比">1. 功能对比</h3>
+<table>
+<thead>
+<tr>
+<th><strong>功能</strong></th>
+<th><strong>官方 Recovery</strong></th>
+<th><strong>TWRP（自定义）</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>界面交互</td>
+<td>仅文本菜单（音量键控制）</td>
+<td>触控图形界面 + 鼠标支持</td>
+</tr>
+<tr>
+<td>分区挂载</td>
+<td>仅支持 /cache 和 /data</td>
+<td>支持所有分区（包括 OTG U盘）</td>
+</tr>
+<tr>
+<td>文件管理</td>
+<td>无</td>
+<td>内置文件管理器（复制/删除）</td>
+</tr>
+<tr>
+<td>备份类型</td>
+<td>无</td>
+<td>Nandroid（全分区镜像备份）</td>
+</tr>
+<tr>
+<td>Root 支持</td>
+<td>无</td>
+<td>直接刷入 Magisk.zip</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-刷入-twrp-步骤需已解锁-bootloader">2. 刷入 TWRP 步骤（需已解锁 Bootloader）</h3>
+<pre><code class="language-bash"># 下载对应设备的 .img 文件
+adb reboot bootloader
+fastboot flash recovery twrp-3.7.0.img
+fastboot reboot recovery
+</code></pre>
+<hr>
+<h2 id="四-recovery-模式高级操作指南">四、Recovery 模式高级操作指南</h2>
+<h3 id="1-清除-dalvikart-缓存">1. 清除 Dalvik/ART 缓存</h3>
+<ul>
+<li><strong>适用场景</strong>：解决应用崩溃或系统升级后卡顿</li>
+<li><strong>路径</strong>：Wipe → Advanced Wipe → 勾选&quot;Dalvik/ART Cache&quot;</li>
+</ul>
+<h3 id="2-刷入-magisk-获取-root">2. 刷入 Magisk 获取 Root</h3>
+<ol>
+<li>下载 Magisk-v26.1.zip 到设备存储或 OTG U盘</li>
+<li>TWRP 中选择 Install → 选中 zip 文件 → 滑动确认</li>
+<li>重启后安装 Magisk App 管理权限</li>
+</ol>
+<h3 id="3-解密-data-分区android-9">3. 解密 Data 分区（Android 9+）</h3>
+<ul>
+<li><strong>问题</strong>：TWRP 无法直接访问加密的 /data</li>
+<li><strong>解决方案</strong>：
+<ul>
+<li>进入 TWRP → 输入锁屏密码或图案</li>
+<li>或临时禁用加密：刷入 Disable_Dm-Verity.zip</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="五-救砖操作从-recovery-恢复系统">五、救砖操作：从 Recovery 恢复系统</h2>
+<h3 id="1-通过-adb-sideload-刷机">1. 通过 ADB Sideload 刷机</h3>
+<pre><code class="language-bash"># 设备进入 Recovery → Advanced → ADB Sideload
+adb sideload lineage-20.0.zip  # 刷入 LineageOS
+</code></pre>
+<h3 id="2-恢复-nandroid-备份">2. 恢复 Nandroid 备份</h3>
+<ol>
+<li>将备份文件（TWRP/BACKUPS/序列号）复制到设备</li>
+<li>TWRP 中选择 Restore → 选择备份 → 勾选分区</li>
+<li>滑动恢复 → 重启系统</li>
+</ol>
+<hr>
+<h2 id="六-常见问题与解决方案">六、常见问题与解决方案</h2>
+<h3 id="1-recovery-模式无法进入">1. Recovery 模式无法进入</h3>
+<ul>
+<li><strong>排查步骤</strong>：
+<ul>
+<li>确认按键组合正确（不同机型有差异）</li>
+<li>使用 <code>fastboot boot recovery.img</code> 临时启动</li>
+<li>检查硬件按键是否损坏</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-刷机后卡在-bootloop">2. 刷机后卡在 Bootloop</h3>
+<ul>
+<li><strong>应急处理</strong>：
+<ul>
+<li>强制重启再次进入 Recovery</li>
+<li>清除 Dalvik Cache 和 Cache 分区</li>
+<li>重新刷入 ROM 或恢复备份</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-twrp-触屏失灵">3. TWRP 触屏失灵</h3>
+<ul>
+<li><strong>外接设备</strong>：使用 USB OTG 连接鼠标操作</li>
+<li><strong>替代方案</strong>：通过 <code>adb shell</code> 执行命令</li>
+</ul>
+<hr>
+<p><strong>安全提示</strong>：<br>
+⚠️ 刷机前务必备份重要数据至 PC 或云端，避免操作失误导致数据不可逆丢失。谨慎选择第三方 ROM 来源，建议从 XDA 开发者论坛等可信渠道获取。</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://huts1234.github.io/nas/">
+                  <h3 class="post-title">
+                    nas
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>

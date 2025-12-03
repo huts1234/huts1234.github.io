@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>Git | Gridea</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://huts1234.github.io/favicon.ico?v=1764722134508">
+<link rel="stylesheet" href="https://huts1234.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="Git 全面解析指南
+一、Git 核心概念
+1.1 定义与特性
+
+分布式版本控制系统：每个开发者拥有完整仓库副本（含完整历史记录）
+核心目标：高效管理代码变更，支持非线性开发（并行分支）
+关键优势：
+
+本地操作（无需网络连接）
+数据完整性（..." />
+    <meta name="keywords" content="" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://huts1234.github.io">
+        <img src="https://huts1234.github.io/images/avatar.png?v=1764722134508" class="site-logo">
+        <h1 class="site-title">Gridea</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+      温故而知新
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://huts1234.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">Git</h2>
+            <div class="post-date">2025-11-28</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="git-全面解析指南">Git 全面解析指南</h1>
+<h2 id="一-git-核心概念">一、Git 核心概念</h2>
+<h3 id="11-定义与特性">1.1 定义与特性</h3>
+<ul>
+<li><strong>分布式版本控制系统</strong>：每个开发者拥有完整仓库副本（含完整历史记录）</li>
+<li><strong>核心目标</strong>：高效管理代码变更，支持非线性开发（并行分支）</li>
+<li><strong>关键优势</strong>：
+<ul>
+<li>本地操作（无需网络连接）</li>
+<li>数据完整性（SHA-1哈希校验）</li>
+<li>分支/合并轻量化</li>
+</ul>
+</li>
+</ul>
+<h3 id="12-版本控制模型对比">1.2 版本控制模型对比</h3>
+<table>
+<thead>
+<tr>
+<th><strong>维度</strong></th>
+<th><strong>集中式（如SVN）</strong></th>
+<th><strong>分布式（Git）</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>仓库位置</td>
+<td>单一中央服务器</td>
+<td>每个用户本地拥有完整仓库</td>
+</tr>
+<tr>
+<td>网络依赖</td>
+<td>提交/更新需联网</td>
+<td>多数操作可离线完成</td>
+</tr>
+<tr>
+<td>分支操作</td>
+<td>目录复制，高开销</td>
+<td>指针操作，毫秒级创建</td>
+</tr>
+<tr>
+<td>历史追溯</td>
+<td>仅记录版本号</td>
+<td>完整提交哈希链</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="二-git-核心组件">二、Git 核心组件</h2>
+<h3 id="21-仓库结构">2.1 仓库结构</h3>
+<pre><code class="language-bash">.git/
+├── HEAD            # 当前分支引用
+├── objects/        # 数据对象（blob/tree/commit）
+├── refs/           # 分支与标签指针
+│   ├── heads/      # 本地分支
+│   └── tags/       # 版本标签
+├── config          # 仓库配置
+└── index           # 暂存区状态
+</code></pre>
+<h3 id="22-数据对象类型">2.2 数据对象类型</h3>
+<table>
+<thead>
+<tr>
+<th><strong>类型</strong></th>
+<th><strong>描述</strong></th>
+<th><strong>示例SHA-1</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Blob</strong></td>
+<td>存储文件内容（二进制或文本）</td>
+<td>e69de29...（空文件）</td>
+</tr>
+<tr>
+<td><strong>Tree</strong></td>
+<td>目录结构（包含文件名、权限和子对象指针）</td>
+<td>92ec0b6...</td>
+</tr>
+<tr>
+<td><strong>Commit</strong></td>
+<td>提交元数据（作者、时间、父提交指针）</td>
+<td>8d3f3a9...</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="三-git-工作流与常用命令">三、Git 工作流与常用命令</h2>
+<h3 id="31-基础工作流程">3.1 基础工作流程</h3>
+<ol>
+<li>
+<p><strong>初始化仓库</strong></p>
+<pre><code class="language-bash">git init                    # 创建新仓库
+git clone &lt;url&gt;             # 克隆远程仓库
+</code></pre>
+</li>
+<li>
+<p><strong>文件状态周期</strong></p>
+<pre><code class="language-bash">git add &lt;file&gt;              # 工作区 → 暂存区
+git commit -m &quot;message&quot;     # 暂存区 → 本地仓库
+git push origin main        # 本地仓库 → 远程仓库
+</code></pre>
+</li>
+<li>
+<p><strong>状态查看</strong></p>
+<pre><code class="language-bash">git status                  # 查看工作区/暂存区状态
+git log --oneline --graph   # 图形化提交历史
+</code></pre>
+</li>
+</ol>
+<h3 id="32-分支管理">3.2 分支管理</h3>
+<table>
+<thead>
+<tr>
+<th><strong>操作</strong></th>
+<th><strong>命令示例</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>创建分支</td>
+<td><code>git branch feature-x</code></td>
+</tr>
+<tr>
+<td>切换分支</td>
+<td><code>git checkout feature-x</code></td>
+</tr>
+<tr>
+<td>合并分支（非快进）</td>
+<td><code>git merge --no-ff feature-x</code></td>
+</tr>
+<tr>
+<td>删除已合并分支</td>
+<td><code>git branch -d feature-x</code></td>
+</tr>
+<tr>
+<td>强制删除未合并分支</td>
+<td><code>git branch -D feature-x</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="33-远程协作">3.3 远程协作</h3>
+<pre><code class="language-bash">git remote add origin &lt;url&gt;     # 添加远程仓库
+git fetch origin               # 获取远程更新（不合并）
+git pull origin main           # 拉取并合并（= fetch + merge）
+git push -u origin main        # 推送并设置上游分支
+</code></pre>
+<hr>
+<h2 id="四-高级功能与技巧">四、高级功能与技巧</h2>
+<h3 id="41-代码回退与修复">4.1 代码回退与修复</h3>
+<table>
+<thead>
+<tr>
+<th><strong>场景</strong></th>
+<th><strong>解决方案</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>撤销工作区修改</td>
+<td><code>git checkout -- &lt;file&gt;</code></td>
+</tr>
+<tr>
+<td>撤销暂存区文件</td>
+<td><code>git reset HEAD &lt;file&gt;</code></td>
+</tr>
+<tr>
+<td>回退到历史提交</td>
+<td><code>git reset --hard commit_id</code></td>
+</tr>
+<tr>
+<td>修改最后一次提交</td>
+<td><code>git commit --amend</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="42-贮藏与清理">4.2 贮藏与清理</h3>
+<pre><code class="language-bash">git stash                      # 暂存当前修改
+git stash pop                  # 恢复最近贮藏内容
+git clean -fd                 # 删除未跟踪文件/目录
+</code></pre>
+<h3 id="43-二分法调试">4.3 二分法调试</h3>
+<pre><code class="language-bash">git bisect start              # 启动二分查找
+git bisect bad                # 标记当前版本有问题
+git bisect good v1.0          # 标记已知正常版本
+# 根据测试结果继续标记good/bad
+git bisect reset              # 退出二分模式
+</code></pre>
+<hr>
+<h2 id="五-git-分支策略">五、Git 分支策略</h2>
+<h3 id="51-git-flow-模型">5.1 Git Flow 模型</h3>
+<pre><code class="language-mermaid">graph TD
+  A[main] --&gt;|发布| B((v1.0))
+  A --&gt;|合并| C[develop]
+  C --&gt;|功能开发| D(feature/*)
+  C --&gt;|热修复| E(hotfix/*)
+  C --&gt;|预发布| F(release/*)
+</code></pre>
+<h3 id="52-github-flow-原则">5.2 GitHub Flow 原则</h3>
+<ol>
+<li><strong>main分支始终可部署</strong></li>
+<li>新功能通过Pull Request合并</li>
+<li>功能分支从main创建并命名明确</li>
+<li>合并前必须通过CI测试</li>
+</ol>
+<hr>
+<h2 id="六-git-性能优化">六、Git 性能优化</h2>
+<h3 id="61-仓库瘦身">6.1 仓库瘦身</h3>
+<pre><code class="language-bash"># 清理历史大文件
+git filter-branch --tree-filter 'rm -f bigfile.iso' HEAD
+git reflog expire --expire=now --all
+git gc --prune=now --aggressive
+</code></pre>
+<h3 id="62-常用配置优化">6.2 常用配置优化</h3>
+<pre><code class="language-bash">git config --global core.preloadindex true   # 启用预加载索引
+git config --global core.fscache true        # 文件系统缓存
+git config --global pack.threads 0            # 自动选择压缩线程
+</code></pre>
+<hr>
+<h2 id="七-企业级最佳实践">七、企业级最佳实践</h2>
+<ol>
+<li><strong>代码审查</strong>：强制使用Pull Request + 至少1人审核</li>
+<li><strong>Commit规范</strong>：遵循<a href="https://www.conventionalcommits.org/">Conventional Commits</a></li>
+<li><strong>保护分支</strong>：禁止直接push到main分支</li>
+<li><strong>自动化检查</strong>：集成ESLint/Prettier + Husky钩子</li>
+<li><strong>备份策略</strong>：定期镜像到多个远程仓库（GitHub + GitLab）</li>
+</ol>
+<hr>
+<h2 id="八-学习资源推荐">八、学习资源推荐</h2>
+<ul>
+<li><strong>官方文档</strong>：<a href="https://git-scm.com/doc">git-scm.com/doc</a></li>
+<li><strong>交互教程</strong>：<a href="https://learngitbranching.js.org/">Learn Git Branching</a></li>
+<li><strong>书籍推荐</strong>：
+<ul>
+<li>《Pro Git》（免费在线阅读）</li>
+<li>《Git权威指南》</li>
+</ul>
+</li>
+<li><strong>进阶工具</strong>：
+<ul>
+<li>Tig（终端可视化工具）</li>
+<li>LazyGit（交互式终端UI）</li>
+</ul>
+</li>
+</ul>
+<p>掌握Git需要理论与实践结合，建议在日常开发中逐步尝试高级功能！ 💻🔧</p>
+
+            </div>
+            
+            
+              <div class="next-post">
+                <div class="next">下一篇</div>
+                <a href="https://huts1234.github.io/kai-yuan-ruan-jian-open-source-software-vs-zi-you-ruan-jian-free-software/">
+                  <h3 class="post-title">
+                    开源软件（Open Source Software vs 自由软件（Free Software）
+                  </h3>
+                </a>
+              </div>
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+  <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.5.1/build/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad()
+  </script>
+
+
+
+
+
+  </body>
+</html>
